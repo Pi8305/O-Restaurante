@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/login.css">
+    <script src="js/sessao.js"></script>
     <title>Login</title>
 </head>
 
@@ -30,7 +31,7 @@
         </div>
     </header>
 
-    <body>
+    <main>
         <div class="login-main">
             <div class="alerta_erro">
                 <div class="card_erro" id="cardErro">
@@ -43,18 +44,23 @@
                         Insira seus dados para realizar o login
                     </div>
                     <div>
+                        <label for="inp_email">Email:</label>
                         <input type="text" id="inp_email" class="tamanho">
                     </div>
                     <div>
+                        <label for="inp_email">Senha:</label>
                         <input type="text" id="inp_senha" class="tamanho">
                     </div>
                     <div>
                         <button onclick="entrar()" class="tamanho-botao">Entrar</button>
                     </div>
+                    <div>
+                        <a href="">Ou registre-se aqui</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
+    </main>
 </body>
 
 </html>
