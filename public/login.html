@@ -55,7 +55,7 @@
                         <button onclick="entrar()" class="tamanho-botao">Entrar</button>
                     </div>
                     <div>
-                        <a href="">Ou registre-se aqui</a>
+                        <a href="cadastro.html">Ou registre-se aqui</a>
                     </div>
                 </div>
             </div>
@@ -69,19 +69,19 @@
 
 
     function entrar() {
-        aguardar();
+        /* aguardar(); */
 
         var emailVar = inp_email.value;
         var senhaVar = inp_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "Os campos precisam ser preenchidos para realizar o log-in";
-            finalizarAguardar();
+            mensagem_erro.innerHTML = "<span style='color: red;'>Os campos precisam ser preenchidos para realizar o log-in</span>";
+            /* finalizarAguardar(); */
             return false;
         }
         else {
-            setInterval(sumirMensagem, 5000)
+            /* setInterval(sumirMensagem, 5000) */
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -107,13 +107,10 @@
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    /* sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios) */
 
-                    setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
-
+                    window.location = "./index.html";
                 });
 
             } else {
@@ -122,7 +119,7 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    /* finalizarAguardar(texto); */
                 });
             }
 
@@ -133,8 +130,8 @@
         return false;
     }
 
-    function sumirMensagem() {
+    /* function sumirMensagem() {
         cardErro.style.display = "none"
-    }
+    } */
 
 </script>
