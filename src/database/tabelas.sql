@@ -22,11 +22,14 @@ create table usuario (
     descricao varchar(200),
     idade int,
     pronomes varchar(45),
-    fkLinks int unique
+    fkLinks int unique,
     constraint fkLinksCOns foreign key (fkLinks) references links(idLinks)
 );
 
 create table autor (
     idPost int AUTO_INCREMENT,
-    fk
+    fkUsuario int,
+    nome varchar(45) not null,
+    descricao varchar(200),
+    constraint PKComposta PRIMARY KEY 
 );
