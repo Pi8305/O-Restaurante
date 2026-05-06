@@ -1,8 +1,11 @@
+* {
+    background-color: #e6daa6;
+}
+
 .border-head {
     display: flex;
     height: 100px;
     border-bottom: solid 2px #d5c289;
-    background-color: #e6daa6;
     align-items: center;
     justify-content: center;
 }
@@ -13,7 +16,6 @@
     justify-content: space-between;
     gap: 200px;
     align-items: center;
-    background-color: #e6daa6;
     height: auto;
     width: 1600px;
 }
@@ -32,6 +34,12 @@
     gap: 20px;
 }
 
+.r-side-logado {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .mid {
     display: flex;
     align-self: center;
@@ -40,4 +48,10 @@
 .mid input {
     width: 400px;
     height: auto;
+}
+
+.img_usuario{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
 }

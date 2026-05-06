@@ -107,10 +107,21 @@
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    /* sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios) */
+                    sessionStorage.ID_USUARIO = json.idUsario;
+                    sessionStorage.DESC_USUARIO = json.descricao;
+                    sessionStorage.DT_USUARIO = json.dtCriacao;
+                    sessionStorage.IDADE_USUARIO = json.idade;
+                    sessionStorage.PRONOMES_USUARIO = json.pronomes;
+                    sessionStorage.LINK_USUARIO = json.linktree;
+                    sessionStorage.INSTA_USUARIO = json.instagram;
+                    sessionStorage.TWT_USUARIO = json.twitter;
+                    sessionStorage.BSKY_USUARIO = json.bluesky;
+                    sessionStorage.YT_USUARIO = json.youtube;
+                    sessionStorage.DISC_USUARIO = json.discord;
+                    sessionStorage.OUTROS1_USUARIO = json.outros1;
+                    sessionStorage.OUTROS2_USUARIO = json.outros2;
 
-                    window.location = "./index.html";
+                    window.location = "./index-logado.html";
                 });
 
             } else {
