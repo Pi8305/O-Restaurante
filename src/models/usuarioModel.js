@@ -17,7 +17,7 @@ function cadastrar(nome, email, senha, fkEmpresa) {
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
         INSERT INTO links (idLinks) VALUES (default); 
-        INSERT INTO usuario (nome, email, senha) VALUES ('${nome}', '${email}', '${senha}');
+        INSERT INTO usuario (nome, email, senha, fkLinks) VALUES ('${nome}', '${email}', '${senha}', last_insert_id());
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

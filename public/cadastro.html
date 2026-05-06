@@ -79,7 +79,7 @@
     botao.innerHTML = `<span>Aguarde...</span>`
   }
   function terminou() {
-    botao.innerHTML = `<button onclick="cadastrar()" class="tamanho-botao">Entrar</button>`
+    botao.innerHTML = `<button onclick="cadastrar()" class="tamanho-botao">Cadastrar</button>`
   }
 
   function cadastrar() {
@@ -88,7 +88,7 @@
     var emailVar = inp_email.value;
     var senhaVar = inp_senha.value;
     var CSenhaVar = inp_c_senha.value;
-    let simbulos = ['@', '!', '#', '#', '$', '%', '^', '&', '*', '(', ')', '[', ']', '{', '}', '-', '_', '=', '+', '/', '?', '.', '>', '<', ',', ';', ':', '|', '`', '~', `'`, `"`]
+    let simbulos = ['@', '!', '#', '#', '$', '%', '^', '&', '*', '(', ')', '[', ']', '{', '}', '-', '_', '=', '+', '/', '?', '.', '>', '<', ',', ';', ':', '|', '`', '~', ``, `"`]
     let senhaValida = false
 
     if (

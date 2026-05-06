@@ -49,12 +49,15 @@ insert into links (idLinks) values
 (default);
 
 insert into usuario (nome, email, senha, fkLinks) values 
-('aaaa', 'aaaa@bbbb', 'bbbb', 1);
+('aaaa', 'aaaa@bbbb', 'bbbb', last_insert_id());
 
-select * from usuario;
+select * from usuario join links on usuario.fkLinks = links.idLinks; 
 
 drop table links;
 drop table usuario;
 drop table post;
 drop table tags;
 drop table conexao;
+
+insert into links (idLinks) values
+(default);
