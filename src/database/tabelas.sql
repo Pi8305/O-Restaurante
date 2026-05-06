@@ -16,13 +16,13 @@ create table links (
 create table usuario (
     idUsuario int PRIMARY KEY auto_increment,
     nome varchar(45) not null,
-    email varchar(45) not null,
+    email varchar(45) unique not null,
     senha varchar(45) not null,
     dtCriacao datetime default current_timestamp not null,
     descricao varchar(200),
     idade int,
     pronomes varchar(45),
-    fkLinks int unique,
+    fkLinks int unique not null,
     constraint fkLinksCons foreign key (fkLinks) references links(idLinks)
 );
 
@@ -45,5 +45,16 @@ create table conexao (
     constraint PKComposta2 primary key (fkPost, fkTags)
 );
 
-insert into usuario (nome, email, senha) values 
-('aaaa', 'aaaa@bbbb', 'bbbb');
+insert into links (idLinks) values
+(default);
+
+insert into usuario (nome, email, senha, fkLinks) values 
+('aaaa', 'aaaa@bbbb', 'bbbb', 1);
+
+select * from usuario;
+
+drop table links;
+drop table usuario;
+drop table post;
+drop table tags;
+drop table conexao;
