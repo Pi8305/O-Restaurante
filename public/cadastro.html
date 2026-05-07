@@ -52,10 +52,11 @@
             <input type="text" id="inp_email" class="tamanho" placeholder="aaaa@bbbb.ccc">
           </div>
           <div>
-            <label for="inp_email">Senha: <span class="senha">(precisa conter 1 simbulo e 1 letra maiuscula e
-                minuscula)</span></label>
+            <label for="inp_email">Senha:</label>
             <input type="text" id="inp_senha" class="tamanho" placeholder="********">
           </div>
+          <div><span class="senha_info">(precisa conter 1 simbulo e 1 letra maiuscula e
+                minuscula)</span></div>
           <div>
             <label for="inp_email">Confirmar senha:</label>
             <input type="text" id="inp_c_senha" class="tamanho" placeholder="********">
@@ -108,6 +109,12 @@
       terminou()
       return false;
     };
+
+    if (senhaVar.length < 8) {
+      mensagem_erro.innerHTML = "Senha curta demais"
+      terminou()
+      return false;
+    }
 
     for (i = 0; i < simbulos.length; i++) {
       if (senhaVar.includes(simbulos[i])) {
