@@ -58,6 +58,3 @@ drop table usuario;
 drop table post;
 drop table tags;
 drop table conexao;
-
-insert into links (idLinks) values
-(default);
