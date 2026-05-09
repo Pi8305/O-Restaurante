@@ -55,11 +55,15 @@
             <label for="inp_email">Senha:</label>
             <input type="text" id="inp_senha" class="tamanho" placeholder="********">
           </div>
-          <div><span class="senha_info">(precisa conter 1 simbulo e 1 letra maiuscula e
-                minuscula)</span></div>
-          <div>
-            <label for="inp_email">Confirmar senha:</label>
-            <input type="text" id="inp_c_senha" class="tamanho" placeholder="********">
+          <div><span class="senha-info">(precisa conter 1 simbulo e 1 letra maiuscula e
+              minuscula)</span></div>
+          <div class="confirmar-senha">
+            <div>
+              <label for="inp_email">Confirmar<br>senha:</label>
+            </div>
+            <div>
+              <input type="text" id="inp_c_senha" class="tamanho" placeholder="********">
+            </div>
           </div>
           <div>
             <div id="botao"><button onclick="cadastrar()" class="tamanho-botao">Cadastrar</button></div>
@@ -162,8 +166,8 @@
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
-      
-      terminou()
+
+    terminou()
     return false;
   }
 </script>
