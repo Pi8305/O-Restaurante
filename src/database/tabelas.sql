@@ -35,7 +35,7 @@ create table post (
 );
 
 create table tags (
-	idTag int primary key,
+	idTag int primary key auto_increment,
     tag varchar(15)
 );
 
@@ -58,3 +58,19 @@ drop table usuario;
 drop table post;
 drop table tags;
 drop table conexao;
+
+insert into post (fkUsuario, nome, descricao, likes) values
+(1, 'Primeiro post', 'Descrição daora', 67);
+
+insert into tags (tag) values
+('legal');
+
+insert into conexao values
+(8, 1);
+
+select post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag order by idPost desc limit 5;
+
+drop view postsView;
+create view postsView as (select post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag);
+
+select * from postsView order by idPost desc limit 5;
