@@ -69,20 +69,15 @@
 
 
     function entrar() {
-        /* aguardar(); */
 
         var emailVar = inp_email.value;
         var senhaVar = inp_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
             mensagem_erro.innerHTML = "<span style='color: red;'>Os campos precisam ser preenchidos para realizar o log-in</span>";
-            /* finalizarAguardar(); */
             return false;
         }
-        else {
-            /* setInterval(sumirMensagem, 5000) */
-        }
+        else
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
