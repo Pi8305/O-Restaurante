@@ -66,11 +66,13 @@ insert into tags (tag) values
 ('legal');
 
 insert into conexao values
-(8, 1);
+(1, 1);
 
-select post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag order by idPost desc limit 5;
+select usuario.nome userr, post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario order by idPost desc limit 5;
 
 drop view postsView;
-create view postsView as (select post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag);
+create view postsView as (select usuario.nome userr, post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario);
 
-select * from postsView order by idPost desc limit 5;
+select * from postsView order by idPost desc limit 20;
+select * from postsView order by idPost limit 20;
+select * from postsView where idPost > 20 order by idPost limit 20;

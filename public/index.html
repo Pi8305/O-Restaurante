@@ -39,7 +39,10 @@
                 <img src="img/placeholder.png" alt="">
             </div>
             <div class="texto-ap">
-                <span class="txt-ap">O nome "O Restaurante" vem de uma piada na comunidade online de arte aonde, para elogiar o desenho de alguem, alguem pode tratar aquilo como comida e dizer algo como "Comi seu desenho" ou  "Obrigado pela refeição". Esse site serve então para satisfazer toda a sua fome por arte ou te dar um lugar onde você pode mostrar para o mundo sua criação, bon appétit!</span>
+                <span class="txt-ap">O nome "O Restaurante" vem de uma piada na comunidade online de arte aonde, para
+                    elogiar o desenho de alguem, alguem pode tratar aquilo como comida e dizer algo como "Comi seu
+                    desenho" ou "Obrigado pela refeição". Esse site serve então para satisfazer toda a sua fome por arte
+                    ou te dar um lugar onde você pode mostrar para o mundo sua criação, bon appétit!</span>
             </div>
         </div>
 
@@ -47,128 +50,49 @@
             <span>Posts mais recentes</span>
         </div>
 
-        <div class="posts">
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/posts/Caim.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/posts/denner e mav.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/posts/lucca teste.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/posts/Emineth.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/placeholder.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/placeholder.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/placeholder.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/placeholder.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/placeholder.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/placeholder.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/placeholder.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-            <a href=""><div class="post">
-                <div class="img-post">
-                    <img src="img/placeholder.png" alt="">
-                </div>
-                <div class="txt-post">
-                    <span>Titulo</span>
-                    <span>Usuario</span>
-                </div>
-            </div></a>
-        </div>
-        <div class="ver-todos">
-            <a href=""><span>Ver todos >></span></a>
+        <div id="postes" class="posts">
+
         </div>
     </main>
 
     <footer>
         <div class="footer">
             <div>
-                
+
             </div>
         </div>
     </footer>
 </body>
 
 </html>
+
+<script>
+    if ((sessionStorage.EMAIL_USUARIO)) {
+        window.location = "index-logado.html";
+    }
+
+    renderiza()
+
+    function renderiza() {
+        fetch("/posts/renderizarIndex", {
+            method: "POST"
+        }).then(function (resposta) {
+                for (i = 0; i < resposta.length; i++) {
+                    let post = resposta[i]
+
+                    postes.innerHTML += `
+                    <a href="post.html"><div class="post">
+                    <div class="img-post">
+                        <img src="img/${post.idPost}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';">
+                    </div>
+                    <div class="txt-post">
+                        <span>${post.nome}</span onerror="this.onerror='Nome do post';">
+                        <span>${post.nome}</span onerror="this.onerror='Usuario';">
+                    </div>
+                    </div></a>
+                    `
+                }
+            }
+        )
+    }
+</script>
