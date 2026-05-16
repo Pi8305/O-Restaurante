@@ -1,9 +1,11 @@
 var postsModel = require("../models/postsModel");
 
-function renderizar() {
-    postsModel.renderizar()
+function renderizar(req, res) {
+    postsModel.renderizar(req, res)
         .then(
-            res.json({resposta})
+            function (resultado) {
+                    res.json(resultado);
+                }
         ).catch(
             function (erro) {
                 console.log(erro);
@@ -13,10 +15,12 @@ function renderizar() {
         );
 }
 
-function renderizarIndex() {
-    postsModel.renderizarIndex()
+function renderizarIndex(req, res) {
+    postsModel.renderizarIndex(req, res)
         .then(
-            res.json({resposta})
+            function (resultado) {
+                    res.json(resultado);
+                }
         ).catch(
             function (erro) {
                 console.log(erro);
