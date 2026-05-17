@@ -13,7 +13,7 @@
   justify-content: start;
   width: 300px;
   text-align: center;
-  transform: translateY(-50px);
+  transform: translateY(-20px);
   position: fixed;
 }
 
@@ -62,6 +62,15 @@
 .confirmar-senha {
     display: flex;
     align-items: center;
-    flex-direction: row;
-    transform: translateX(-9px);
+    flex-direction: column;
+    gap: 20px;
+    
 }
+
+.c-senha {
+    color: #e6daa6;
+}
+
+/* .mover {
+    transform: translateY(12px);
+} */

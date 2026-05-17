@@ -38,7 +38,7 @@
             <div id="postes" class="posts">
             </div>
             <div class="ver-mais">
-                <span onclick="carregarMais()">Ver Mais >></span>
+                <span onclick="carregarMais()">Carregar Mais</span>
             </div>
         </div>
     </main>
@@ -72,13 +72,13 @@
             .then(function (posts) {
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i];
-                    document.getElementById("postes").innerHTML += `
-                        <a href="post.html">
-                            <div class="post">
-                                <div class="img-post">
+                    postes.innerHTML += `
+                        <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
+                            <div class="post tira-coiso">
+                                <div class="img-post tira-coiso">
                                     <img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
                                 </div>
-                                <div class="txt-post">
+                                <div class="txt-post tira-coiso">
                                     <span>${post.nome}</span>
                                     <span>${post.userr}</span>
                                 </div>
@@ -87,5 +87,12 @@
             `;
                 }
             });
+    }
+
+    function avisar(id) {
+        sessionStorage.ID_POST = id
+        console.log(sessionStorage.ID_POST)
+
+        window.location = "post.html";
     }
 </script>

@@ -2,3 +2,7 @@
     background-color: #e7deb5;
     scrollbar-width: none;
 }
+
+a {
+    text-decoration: none;
+}

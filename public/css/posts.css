@@ -36,11 +36,10 @@
     gap: 10px;
 }
 
-.txt-post a {
+.txt-post span {
     background-color: #f7f5ed;
     font-size: 20px;
     color: #2c2519;
-    text-decoration: none;
 }
 
 .ver-todos {

@@ -30,7 +30,24 @@ function renderizarIndex(req, res) {
         );
 }
 
+function buscarPost(req, res) {
+    let idPost = req.params.idPost
+    postsModel.buscarPost(idPost)
+        .then(
+            function(resultado) {
+                res.json(resultado[0]);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar a renderização do post! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
+}
+
 module.exports = {
     renderizar,
-    renderizarIndex
+    renderizarIndex,
+    buscarPost
 }

@@ -12,4 +12,7 @@ router.get("/renderizarIndex", function (req, res) {
     postsController.renderizarIndex(req, res);
 })
 
+router.get("/buscarPost/:idPost", function (req, res) {
+    postsController.buscarPost(req, res);
+})
 module.exports = router;

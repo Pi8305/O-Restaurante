@@ -22,9 +22,11 @@
           <input type="text" id="search">
         </div>
         <div class="r-side">
-          <img src="img/imagem2.png" alt="" style="padding-right: 0.22px;">
-          <div class="register-button">
-            <a href="">Registrar</a>
+          <div class="login-button">
+            <a href="login.html">Login</a>
+          </div>
+          <div class="register-button apagar">
+            <span>Registrar</span>
           </div>
         </div>
       </div>
@@ -44,36 +46,35 @@
             Insira os dados para o cadastro
           </div>
           <div>
-            <label for="inp_email">Nome:</label>
-            <input type="text" id="inp_nome" class="tamanho" placeholder="NÃO INSIRA SEU NOME REAL">
+            <label for="inp_nome" class="mover">Nome:</label>
+            <input type="text" id="inp_nome" class="tamanho mover" placeholder="NÃO INSIRA SEU NOME REAL">
           </div>
           <div>
-            <label for="inp_email">Email:</label>
-            <input type="text" id="inp_email" class="tamanho" placeholder="aaaa@bbbb.ccc">
+            <label for="inp_email" class="mover">Email:</label>
+            <input type="text" id="inp_email" class="tamanho mover" placeholder="aaaa@bbbb.ccc">
           </div>
-          <div>
-            <label for="inp_email">Senha:</label>
-            <input type="text" id="inp_senha" class="tamanho" placeholder="********">
-          </div>
-          <div><span class="senha-info">(precisa conter 1 simbulo e 1 letra maiuscula e
-              minuscula)</span></div>
           <div class="confirmar-senha">
             <div>
-              <label for="inp_email">Confirmar<br>senha:</label>
+              <label for="inp_senha" class="mover">Senha:</label>
+              <input type="text" id="inp_senha" class="tamanho mover" placeholder="********">
             </div>
             <div>
-              <input type="text" id="inp_c_senha" class="tamanho" placeholder="********">
+              <label for="inp_c_senha" class="c-senha">Senha:</label>
+              <input type="text" id="inp_c_senha" class="tamanho" placeholder="Confirme a senha">
+            </div>
+            <div>
+              <span class="senha-info mover">(precisa conter 1 simbulo e 1 letra maiuscula e
+                minuscula)</span>
             </div>
           </div>
           <div>
             <div id="botao"><button onclick="cadastrar()" class="tamanho-botao">Cadastrar</button></div>
           </div>
           <div>
-            <a href="cadastro.html">Ja tem uma conta? Realize o login aqui</a>
+            <a href="login.html">Ja tem uma conta? Realize o login aqui</a>
           </div>
         </div>
       </div>
-    </div>
   </main>
 </body>
 

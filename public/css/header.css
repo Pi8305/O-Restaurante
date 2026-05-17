@@ -43,6 +43,7 @@
 .mid {
     display: flex;
     align-self: center;
+    transform: translateX(-9px);
 }
 
 .mid input {
@@ -59,4 +60,10 @@
 .usuario-nome {
     color: black;
     text-decoration: none;
+}
+
+.apagar {
+    color: #e6daa6;
+    text-decoration: none;
+    cursor: default;
 }
