@@ -89,18 +89,16 @@
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i];
                     document.getElementById("postes").innerHTML += `
-                        <a href="post.html">
                             <div class="post">
                                 <div class="img-post">
-                                    <img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
+                                    <a href="post.html?id=${post.idPost}"><img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'"></a>
                                 </div>
                                 <div class="txt-post">
-                                    <span>${post.nome}</span>
-                                    <span>${post.userr}</span>
+                                    <a href="post.html?id=${post.idPost}"><span>${post.nome}</span></a>
+                                    <a href="post.html?id=${post.idPost}"><span>${post.userr}</span></a>
                                 </div>
                             </div>
-                        </a>
-            `;
+                        `;
                 }
             });
     }

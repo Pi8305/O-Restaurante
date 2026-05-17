@@ -68,10 +68,10 @@ insert into tags (tag) values
 insert into conexao values
 (1, 1);
 
-select usuario.nome userr, post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario order by idPost desc limit 5;
+select usuario.nome userr, usuario.idUsuario idUsuario, post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario;
 
 drop view postsView;
-create view postsView as (select usuario.nome userr, post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario);
+create view postsView as (select usuario.nome userr, usuario.idUsuario idUsuario, post.*, tags.* from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario);
 
 select * from postsView order by idPost desc limit 20;
 select * from postsView order by idPost limit 20;

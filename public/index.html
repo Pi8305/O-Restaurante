@@ -87,19 +87,19 @@
             .then(function (posts) {
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i];
-                    document.getElementById("postes").innerHTML += `
-                <a href="post.html">
-                    <div class="post">
-                        <div class="img-post">
-                            <img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
-                        </div>
-                        <div class="txt-post">
-                            <span>${post.nome}</span>
-                            <span>${post.userr}</span>
-                        </div>
-                    </div>
-                </a>
-            `;
+                    postes.innerHTML += `
+                    <a href="post.html?id=${post.idPost}">
+                            <div class="post">
+                                <div class="img-post">
+                                    <img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
+                                </div>
+                                <div class="txt-post">
+                                    <span>${post.nome}</span>
+                                    <span>${post.userr}</span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
                 }
             });
     }

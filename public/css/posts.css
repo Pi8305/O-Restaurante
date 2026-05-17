@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    text-decoration: none;
 }
 
 .post {
@@ -35,9 +36,11 @@
     gap: 10px;
 }
 
-.txt-post span {
+.txt-post a {
     background-color: #f7f5ed;
     font-size: 20px;
+    color: #2c2519;
+    text-decoration: none;
 }
 
 .ver-todos {
@@ -45,9 +48,28 @@
     justify-content: center;
     padding-top: 40px;
     padding-bottom: 40px;
-    
+}
+
+.ver-todos a {
+    color: #2c2519;
+    text-decoration: none;
 }
 
 .ver-todos span {
     font-size: 40px;
 }
+
+.ver-mais {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.ver-mais span {
+    cursor: pointer;
+    color: #2c2519;
+    font-size: 40px;
+}
+
+/* #f3f0e4 */
