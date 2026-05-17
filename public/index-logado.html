@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/posts.css">
-    <script src="js/index.js"></script>
     <title>O Restaurante</title>
 </head>
 
@@ -89,16 +88,18 @@
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i];
                     document.getElementById("postes").innerHTML += `
+                        <a href="post.html">
                             <div class="post">
                                 <div class="img-post">
-                                    <a href="post.html?id=${post.idPost}"><img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'"></a>
+                                    <img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
                                 </div>
                                 <div class="txt-post">
-                                    <a href="post.html?id=${post.idPost}"><span>${post.nome}</span></a>
-                                    <a href="post.html?id=${post.idPost}"><span>${post.userr}</span></a>
+                                    <span>${post.nome}</span>
+                                    <span>${post.userr}</span>
                                 </div>
                             </div>
-                        `;
+                        </a>
+                    `;
                 }
             });
     }

@@ -4,19 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/post.css">
+    <title>O Restaurante</title>
 </head>
 
 <body>
+    <div class="border-head">
+            <div class="header">
+                <div class="l-side">
+                    <a href="index-logado.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
+                </div>
+                <div class="mid">
+                    <input type="text" id="search">
+                </div>
+                <div class="r-side">
+                    <div id="nome_usuario">
+                        <a href="configuracao.html" class="usuario-nome">Usuario</a>
+                    </div>
+                    <div id="imagem_usuario">
+                        <a href="configuracao.html"><img src="img/placeholder.png" alt="" class="pfp-index"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="corpo">
+            <div id="divPost" class="imagem-post"></div>
+            <div>
+                <div>
+                    <span>TITULO</span>
+                </div>
+                <div>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                </div>
+                <div>
+                    <div>
+                        <span>Like</span>
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <div>
 
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
 
 <script>
-    if (!(sessionStorage.EMAIL_USUARIO)) {
+    /* if (!(sessionStorage.EMAIL_USUARIO)) {
         window.location = "login.html";
-    } else {
+    } else { */
+
+        nome_usuario.innerHTML = `<a href="configuracao.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
+
+        imagem_usuario.innerHTML = `<a href="configuracao.html"><img src="img/${sessionStorage.ID_USUARIO}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
+
         let params = new URLSearchParams(window.location.search);
         let idPost = params.get("id");
 
@@ -27,5 +83,5 @@
             .then(function (post) {
                 postNome.innerHTML = post.nome;
             });
-    };
+    /* }; */
 </script>
