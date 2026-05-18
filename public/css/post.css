@@ -1,3 +1,61 @@
-.corpo {
+.corpo-do-post {
     display: flex;
+    border: 2px solid #f7f5ed;
+    background-color: #f7f5ed;
+    align-items: center;
+    justify-content: center;
+    gap: 90px;
+    padding: 50px;
 }
+
+.corpo-do-post * {
+    display: flex;
+    background-color: #f7f5ed;
+}
+
+.like {
+    
+}
+
+.tag-link {
+    color: navy;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.tags {
+    height: 50px;
+    width: 528;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.desc {
+    width: 500px;    
+}
+
+.desc span {
+    overflow-wrap: break-word;
+}
+
+.titulo {
+    font-size: 60px;
+}
+
+.imagem-post {
+    width: 100%;
+    overflow: hidden;
+}
+
+.imagem-post img {
+    width: 900px;
+    height: 900px;
+    object-fit: contain;
+}
+
+.detalhes {
+    gap: 50px;
+    flex-direction: column;
+    align-items: center;
+}
+

@@ -15,4 +15,9 @@ router.get("/renderizarIndex", function (req, res) {
 router.get("/buscarPost/:idPost", function (req, res) {
     postsController.buscarPost(req, res);
 })
+
+router.get("/renderizarPorPesquisa/:tag", function (req, res) {
+    postsController.buscarPostPorPesq(req, res);
+})
+
 module.exports = router;

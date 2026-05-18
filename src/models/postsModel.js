@@ -27,8 +27,18 @@ function buscarPost(idPost, res) {
     return database.executar(instrucaoSql);
 }
 
+function buscarPostPorPesq(tag, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarPostPorPesq(): ")
+    var instrucaoSql = `
+        select * from postsView where concat(',',tags, ',') like '%,${tag},%' order by idPost desc limit 20;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     renderizar,
     renderizarIndex,
-    buscarPost
+    buscarPost,
+    buscarPostPorPesq
 };

@@ -20,7 +20,7 @@
                     <a href="index-logado.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
                 </div>
                 <div class="mid">
-                    <input type="text" id="search">
+                    <input type="text" id="search" onkeydown="pesquisar(event)">
                 </div>
                 <div class="r-side-logado">
                     <div id="nome_usuario">
@@ -72,8 +72,11 @@
     if (!(sessionStorage.EMAIL_USUARIO)) {
         window.location = "login.html";
     } else {
+        sessionStorage.PESQUISANDO = false
         renderiza()
     }
+
+    delete sessionStorage.PESQUISA_ATUAL
 
     nome_usuario.innerHTML = `<a href="configuracao.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
 
@@ -88,19 +91,34 @@
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i];
                     postes.innerHTML += `
-                        <a href="post.html">
-                            <div class="post">
-                                <div class="img-post">
-                                    <img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
+                        <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
+                            <div class="post tira-coiso">
+                                <div class="img-post tira-coiso">
+                                    <img src="img/posts/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
                                 </div>
-                                <div class="txt-post">
+                                <div class="txt-post tira-coiso">
                                     <span>${post.nome}</span>
                                     <span>${post.userr}</span>
                                 </div>
                             </div>
                         </a>
-                    `;
+                `;
                 }
             });
+    }
+
+    function avisar(id) {
+        sessionStorage.ID_POST = id
+        console.log(sessionStorage.ID_POST)
+
+        window.location = "post.html";
+    }
+
+    function pesquisar(evento) {
+        if (evento.key == "Enter") {
+            sessionStorage.PESQUISA_ATUAL = search.value
+            sessionStorage.PESQUISANDO = 'true'
+            window.location = "posts.html"
+        }
     }
 </script>

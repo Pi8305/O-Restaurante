@@ -76,7 +76,7 @@
         renderiza()
     }
 
-
+    sessionStorage.PESQUISANDO = false
 
     function renderiza() {
         fetch("posts/renderizarIndex")
@@ -87,19 +87,26 @@
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i];
                     postes.innerHTML += `
-                    <a href="post.html?id=${post.idPost}">
-                            <div class="post">
-                                <div class="img-post">
-                                    <img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
+                        <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
+                            <div class="post tira-coiso">
+                                <div class="img-post tira-coiso">
+                                    <img src="img/posts/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
                                 </div>
-                                <div class="txt-post">
+                                <div class="txt-post tira-coiso">
                                     <span>${post.nome}</span>
                                     <span>${post.userr}</span>
                                 </div>
                             </div>
                         </a>
-                    `;
+                `;
                 }
             });
+    }
+
+    function avisar(id) {
+        sessionStorage.ID_POST = id
+        console.log(sessionStorage.ID_POST)
+
+        window.location = "post.html";
     }
 </script>

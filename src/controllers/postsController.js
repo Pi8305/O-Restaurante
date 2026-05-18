@@ -46,8 +46,25 @@ function buscarPost(req, res) {
         )
 }
 
+function buscarPostPorPesq(req, res) {
+    let tag = req.params.tag
+    postsModel.buscarPostPorPesq(tag)
+        .then(
+            function(resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao realizar a pesquisa! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
+}
+
 module.exports = {
     renderizar,
     renderizarIndex,
-    buscarPost
+    buscarPost,
+    buscarPostPorPesq
 }

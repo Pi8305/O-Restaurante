@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/posts.css">
+    <script src="js/pesquisa.js"></script>
     <title>O Restaurante</title>
 </head>
 
@@ -20,7 +21,7 @@
                     <a href="index-logado.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
                 </div>
                 <div class="mid">
-                    <input type="text" id="search">
+                    <input type="text" id="search" onkeydown="pesquisar(event)">
                 </div>
                 <div class="r-side">
                     <div id="nome_usuario">
@@ -57,26 +58,28 @@
     if (!(sessionStorage.EMAIL_USUARIO)) {
         window.location = "login.html";
     } else {
-        renderiza()
-    }
 
-    nome_usuario.innerHTML = `<a href="configuracao.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
+        console.log(`comecei o script`)
 
-    imagem_usuario.innerHTML = `<a href="configuracao.html"><img src="img/${sessionStorage.ID_USUARIO}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
+        nome_usuario.innerHTML = `<a href="configuracao.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
 
-    function renderiza() {
-        fetch("posts/renderizar")
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .then(function (posts) {
-                for (let i = 0; i < posts.length; i++) {
-                    let post = posts[i];
-                    postes.innerHTML += `
+        imagem_usuario.innerHTML = `<a href="configuracao.html"><img src="img/${sessionStorage.ID_USUARIO}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
+
+        console.log(sessionStorage.PESQUISANDO)
+        if (sessionStorage.PESQUISANDO == 'false') {
+            console.log(`entrei no caso de não tem`)
+            fetch("posts/renderizar")
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (posts) {
+                    for (let i = 0; i < posts.length; i++) {
+                        let post = posts[i];
+                        postes.innerHTML += `
                         <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
                             <div class="post tira-coiso">
                                 <div class="img-post tira-coiso">
-                                    <img src="img/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
+                                    <img src="img/posts/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
                                 </div>
                                 <div class="txt-post tira-coiso">
                                     <span>${post.nome}</span>
@@ -84,15 +87,58 @@
                                 </div>
                             </div>
                         </a>
-            `;
-                }
-            });
-    }
+                        `;
+                    }
+                });
+        } else if (sessionStorage.PESQUISANDO == 'true'){
+            console.log(`entrei no caso de tem`)
+            let pesq = sessionStorage.PESQUISA_ATUAL
 
-    function avisar(id) {
-        sessionStorage.ID_POST = id
-        console.log(sessionStorage.ID_POST)
+            fetch(`posts/renderizarPorPesquisa/${pesq}`)
+                .then(function (resposta) {
+                    return resposta.json()
+                })
+                .then(function (posts) {
+                    for (let i = 0; i < posts.length; i++) {
+                        let post = posts[i];
+                        postes.innerHTML += `
+                        <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
+                            <div class="post tira-coiso">
+                                <div class="img-post tira-coiso">
+                                    <img src="img/posts/${post.idPost}.png" alt="" onerror="this.src='img/placeholder.png'">
+                                </div>
+                                <div class="txt-post tira-coiso">
+                                    <span>${post.nome}</span>
+                                    <span>${post.userr}</span>
+                                </div>
+                            </div>
+                        </a>
+                        `;
+                    }
+                })
+            
+            delete sessionStorage.PESQUISA_ATUAL
+            sessionStorage.PESQUISANDO = 'false'
+        }
 
-        window.location = "post.html";
+        function avisar(id) {
+            sessionStorage.ID_POST = id
+
+            window.location = "post.html";
+        }
+
+        function pesquisar(evento) {
+            if (evento.key == "Enter") {
+                sessionStorage.PESQUISA_ATUAL = search.value
+                sessionStorage.PESQUISANDO = 'true'
+                window.location = "posts.html"
+            }
+        }
+
+        /* let carregados = 20
+        function carregarMais() {
+            fetch()
+        } */
+
     }
 </script>
