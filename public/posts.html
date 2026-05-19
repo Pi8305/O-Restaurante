@@ -25,10 +25,10 @@
                 </div>
                 <div class="r-side">
                     <div id="nome_usuario">
-                        <a href="configuracao.html" class="usuario-nome">Usuario</a>
+                        <a href="config.html" class="usuario-nome">Usuario</a>
                     </div>
                     <div id="imagem_usuario">
-                        <a href="configuracao.html"><img src="img/placeholder.png" alt="" class="pfp-index"></a>
+                        <a href="config.html"><img src="img/placeholder.png" alt="" class="pfp-index"></a>
                     </div>
                 </div>
             </div>
@@ -61,9 +61,9 @@
 
         console.log(`comecei o script`)
 
-        nome_usuario.innerHTML = `<a href="configuracao.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
+        nome_usuario.innerHTML = `<a href="config.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
 
-        imagem_usuario.innerHTML = `<a href="configuracao.html"><img src="img/${sessionStorage.ID_USUARIO}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
+        imagem_usuario.innerHTML = `<a href="config.html"><img src="img/pfp/${sessionStorage.ID_USUARIO}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
 
         console.log(sessionStorage.PESQUISANDO)
         if (sessionStorage.PESQUISANDO == 'false') {

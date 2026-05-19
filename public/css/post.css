@@ -6,6 +6,10 @@
     justify-content: center;
     gap: 90px;
     padding: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .corpo-do-post * {
@@ -14,7 +18,25 @@
 }
 
 .like {
-    
+    border: 2px solid #faf9f3;
+    background-color: #faf9f3;
+    border-radius: 15px;
+    padding: 15px;
+    align-items: center;
+    gap: 20px;
+}
+
+.like * {
+    background-color: #faf9f3;
+}
+
+.like span {
+    font-size: 40px;
+}
+
+.like img {
+    width: 90px;
+    height: 90px;
 }
 
 .tag-link {
@@ -40,6 +62,7 @@
 
 .titulo {
     font-size: 60px;
+    transform: translateY(40px);
 }
 
 .imagem-post {
@@ -59,3 +82,13 @@
     align-items: center;
 }
 
+.autor span {
+    color: navy;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.autor {
+    transform: translateY(15px);
+}

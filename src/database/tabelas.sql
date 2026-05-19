@@ -22,6 +22,7 @@ create table usuario (
     descricao varchar(200),
     idade int,
     pronomes varchar(45),
+    imagem_perfil varchar(255),
     fkLinks int unique not null,
     constraint fkLinksCons foreign key (fkLinks) references links(idLinks)
 );

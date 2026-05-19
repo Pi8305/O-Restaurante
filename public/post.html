@@ -23,10 +23,10 @@
             </div>
             <div class="r-side">
                 <div id="nome_usuario">
-                    <a href="configuracao.html" class="usuario-nome">Usuario</a>
+                    <a href="config.html" class="usuario-nome">Usuario</a>
                 </div>
                 <div id="imagem_usuario">
-                    <a href="configuracao.html"><img src="img/placeholder.png" alt="" class="pfp-index"></a>
+                    <a href="config.html"><img src="img/placeholder.png" alt="" class="pfp-index"></a>
                 </div>
             </div>
         </div>
@@ -38,6 +38,9 @@
             <div class="detalhes">
                 <div class="titulo">
                     <span id="postNome">TITULO</span>
+                </div>
+                <div class="autor" id="spanAutor">
+                    <span>@AUTOR</span>
                 </div>
                 <div class="desc">
                     <span id="postDesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -89,9 +92,9 @@
 <script>
     sessionStorage.PESQUISANDO = false
 
-    nome_usuario.innerHTML = `<a href="configuracao.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
+    nome_usuario.innerHTML = `<a href="config.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
 
-    imagem_usuario.innerHTML = `<a href="configuracao.html"><img src="img/${sessionStorage.ID_USUARIO}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
+    imagem_usuario.innerHTML = `<a href="config.html"><img src="img/pfp/${sessionStorage.ID_USUARIO}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
 
     let params = new URLSearchParams(window.location.search);
     let idDoPost = sessionStorage.ID_POST
@@ -105,15 +108,16 @@
             postNome.innerHTML = post.nome;
             postDesc.innerHTML = post.descricao
             likes.innerHTML = `Likes: ${post.likes}`
+            spanAutor.innerHTML = `<span onclick="autor()">@${post.userr}</span>`
 
             let tag = post.tags.split(",");
 
             if (tag.length == 1) {
-                tags.innerHTML = `<span class="tag-link" onclick="tagLink('${tag[0]}')">${tag[0]}</span> `
+                tags.innerHTML = `<span class="tag-link" onclick="tagLink('${tag[0]}')">#${tag[0]}</span> `
             } else {
                 tags.innerHTML = ``
                 for (i = 0; i < tag.length; i++) {
-                    tags.innerHTML += `<span class="tag-link" onclick="tagLink('${tag[i]}')">${tag[i]}</span> `
+                    tags.innerHTML += `<span class="tag-link" onclick="tagLink('${tag[i]}')">#${tag[i]}</span> `
                 }
             }
         });

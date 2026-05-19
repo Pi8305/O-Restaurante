@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/config.css">
+    <title>Usuario</title>
+</head>
+
+<body>
+    <input type="file" id="arquivo">
+    <button onclick="enviar()">enviar</button>
+</body>
+
+</html>
+
+<script>
+    function enviar() {
+        let usuarioAtual = sessionStorage.ID_USUARIO
+        const formData = new FormData();
+        formData.append('foto', arquivo.files[0])
+        formData.append('id', usuarioAtual)
+
+        fetch("arquivos/postArquivo", {
+            method: "POST",
+            body: formData
+        })
+            .then(function(resposta) {
+                console.log("status:", resposta.status);
+                console.log("Salvou a pfp")
+            })
+    }
+</script>
