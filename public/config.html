@@ -9,16 +9,18 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/config.css">
+    <script src="js/sessao.js"></script>
     <title>Usuario</title>
 </head>
 
 <body>
     <input type="file" id="arquivo">
     <button onclick="enviar()">enviar</button><br><br>
-    <input type="file" id="arquivo"><br>
+    <input type="file" id="arquivoPost"><br>
     <input type="text" id="nomePost"><br>
-    <input type="text" id="descricaoPost">
-    <input type="text" id="tagsUsuario">
+    <input type="text" id="descricaoPost"><br>
+    <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button><br>
+    <div id="tagsss"></div>
     <button onclick="enviarPost()">enviar</button>
 </body>
 
@@ -38,36 +40,47 @@
             .then(function (resposta) {
                 console.log("status:", resposta.status);
                 console.log("Salvou a pfp")
+                setTimeout(() => limparSessao(), 500)
             })
     }
 
-    function enviarPost() {
-        tags = tagsUsuario.value.split(',')
+    let tagues = ''
+    let taguesADD = ''
 
-        fetch('arquivos/verificarTags'), {
+    function AddTag() {
+        let tague = tagsUsuario.value
+
+        fetch(`posts/checkTags`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (res) {
+                for (let i = 0; i < res.length; i++) {
+                    if (!(res[i].tag == tague)) {
+                        tagues += tague
+                        taguesADD += tague
+                    } else {
+                        tagues += tague
+                    }
+                }
+            });
+    }
+
+    function enviarPost() {
+        let usuarioAtual = sessionStorage.ID_USUARIO
+        const formData = new FormData()
+        let nome = nomePost
+        let desc = descricaoPost
+        
+
+        fetch("posts/salvarPost", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            }).then(function (resposta) {
-                const formData = new FormData();
-                formData.append('foto', arquivo.files[0])
-                formData.append('nomePost', nomePost.value)
-                formData.append('descPost', descricaoPost.value)
-                formData.append('tagsPost', tags)
-
-                fetch("arquivos/uploadPost", {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(function (res) {
-                        console.log("status:", res.status);
-                        console.log("Salvou a pfp")
-                    })
+                nomePostServer: 
             })
-        }
+        })
     }
 </script>

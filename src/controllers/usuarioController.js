@@ -28,6 +28,7 @@ function autenticar(req, res) {
                             dtCriacao: resultadoAutenticar[0].dtCriacao,
                             idade: resultadoAutenticar[0].idade,
                             pronomes: resultadoAutenticar[0].pronomes,
+                            pfp: resultadoAutenticar[0].pfp,
                             linktree: resultadoAutenticar[0].linktree,
                             instagram: resultadoAutenticar[0].instagram,
                             twitter: resultadoAutenticar[0].twitter,

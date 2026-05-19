@@ -32,6 +32,7 @@ create table post (
     fkUsuario int,
     nome varchar(45) not null,
     descricao varchar(200),
+    imagem varchar(255) not null,
     likes int
 );
 
@@ -54,20 +55,20 @@ insert into usuario (nome, email, senha, fkLinks) values
 
 select * from usuario join links on usuario.fkLinks = links.idLinks; 
 
-drop table links;
 drop table usuario;
+drop table links;
 drop table post;
 drop table tags;
 drop table conexao;
 
-insert into post (fkUsuario, nome, descricao, likes) values
-(1, 'Primeiro post', 'Descrição daora', 67);
+insert into post (fkUsuario, nome, descricao, imagem, likes) values
+(1, 'Primeiro post', 'Descrição daora', 4, 67);
 
 insert into tags (tag) values
 ('legal');
 
 insert into conexao values
-(5, 2);
+(2, 2);
 
 select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost;
 
@@ -82,3 +83,7 @@ select * from postsView where concat(',',tags, ',') like '%,daora,%' order by id
 
 insert into tags (tag) values
 ('daora');
+
+update usuario set imagem_perfil = 'x' where idUsuario = 'x';
+
+select * from post join conexao on conexao.fkPost = post.idPost join tags on conexao.fkTags = tags.idTag where conexao.fkTags = (select idTag from tags where tag = 'daora');
