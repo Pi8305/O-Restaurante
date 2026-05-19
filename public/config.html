@@ -14,7 +14,12 @@
 
 <body>
     <input type="file" id="arquivo">
-    <button onclick="enviar()">enviar</button>
+    <button onclick="enviar()">enviar</button><br><br>
+    <input type="file" id="arquivo"><br>
+    <input type="text" id="nomePost"><br>
+    <input type="text" id="descricaoPost">
+    <input type="text" id="tagsUsuario">
+    <button onclick="enviarPost()">enviar</button>
 </body>
 
 </html>
@@ -30,9 +35,39 @@
             method: "POST",
             body: formData
         })
-            .then(function(resposta) {
+            .then(function (resposta) {
                 console.log("status:", resposta.status);
                 console.log("Salvou a pfp")
             })
+    }
+
+    function enviarPost() {
+        tags = tagsUsuario.value.split(',')
+
+        fetch('arquivos/verificarTags'), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            }).then(function (resposta) {
+                const formData = new FormData();
+                formData.append('foto', arquivo.files[0])
+                formData.append('nomePost', nomePost.value)
+                formData.append('descPost', descricaoPost.value)
+                formData.append('tagsPost', tags)
+
+                fetch("arquivos/uploadPost", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(function (res) {
+                        console.log("status:", res.status);
+                        console.log("Salvou a pfp")
+                    })
+            })
+        }
     }
 </script>
