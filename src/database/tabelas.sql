@@ -71,7 +71,7 @@ insert into tags (tag) values
 insert into conexao values
 (1, 1);
 
-select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost;
+select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = 1;
 
 drop view postsView;
 create view postsView as (select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost);
@@ -91,7 +91,10 @@ select idTag from tags where tag = 'tag';
 
 select * from conexao;
 select * from tags;
+select * from post;
 
 select idPost from postsView order by idPost desc limit 1;
 
 update post set imagem = 'x' where idPost = 'x';
+
+select idPost from post join usuario on fkUsuario = idUsuario where idUsuario = 1 order by idPost desc limit 1;
