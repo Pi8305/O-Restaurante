@@ -12,4 +12,8 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/verificarID", function(req, res) {
+    usuarioController.adicionarTags(req, res);
+})
+
 module.exports = router;

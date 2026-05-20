@@ -87,7 +87,22 @@ function cadastrar(req, res) {
     }
 }
 
+function verificarIDPost(id, res) {
+    usuarioModel.verificarIDPost(id)
+    .then(function(resultado){
+        res.status(200).json(resultado)
+    })
+}
+
+function verificarID(req, res) {
+    usuarioModel.verificarIDPost(id)
+    .then(function(resultado) {
+        res.status(200).json(resultado)
+    })
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    verificarIDPost
 }

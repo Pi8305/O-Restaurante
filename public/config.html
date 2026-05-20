@@ -20,13 +20,16 @@
     <input type="text" id="nomePost"><br>
     <input type="text" id="descricaoPost"><br>
     <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button><br>
-    <div id="tagsss"></div>
+    <div id="tagsss"></div><br>
     <button onclick="enviarPost()">enviar</button>
 </body>
 
 </html>
 
 <script>
+    let tagues = []
+    let taguesADD = []
+
     function enviar() {
         let usuarioAtual = sessionStorage.ID_USUARIO
         const formData = new FormData();
@@ -44,9 +47,6 @@
             })
     }
 
-    let tagues = ''
-    let taguesADD = ''
-
     function AddTag() {
         let tague = tagsUsuario.value
 
@@ -54,24 +54,49 @@
             .then(function (resposta) {
                 return resposta.json();
             })
-            .then(function (res) {
-                for (let i = 0; i < res.length; i++) {
-                    if (!(res[i].tag == tague)) {
-                        tagues += tague
-                        taguesADD += tague
-                    } else {
-                        tagues += tague
+            .then(function (resposta) {
+                let existe = false;
+
+                for (let i = 0; i < resposta.length; i++) {
+                    if (resposta[i].tag == tague) {
+                        existe = true;
+                        break
                     }
                 }
+
+                tagues.push(tague);
+                if (!existe) {
+                    taguesADD.push(tague);
+                }
+            })
+            .then(function () {
+                tagsss.innerHTML += `${tague} `
             });
     }
 
     function enviarPost() {
         let usuarioAtual = sessionStorage.ID_USUARIO
         const formData = new FormData()
-        let nome = nomePost
-        let desc = descricaoPost
-        
+        formData.append('foto', arquivoPost.files[0])
+        formData.append('id', usuarioAtual)
+        let nome = nomePost.value
+        let desc = descricaoPost.value
+
+        let taguesF = `${tagues}`
+        let taguesADDF = `${taguesADD}`
+
+        fetch("posts/salvarTags", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                tagServerAdd: taguesADDF
+            })
+        }).then(function (resposta) {
+            console.log("Salvou as tags")
+        })
+
 
         fetch("posts/salvarPost", {
             method: "POST",
@@ -79,8 +104,39 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                nomePostServer: 
+                nomePostServer: nome,
+                descPostServer: desc,
+                idUsuario: usuarioAtual
             })
+        }).then(function (res) {
+            console.log("Salvou o post")
+        }).then(function () {
+            return fetch("posts/adicionarTags", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    tagsPostServer: taguesF,
+                    idUsuario: usuarioAtual
+                })
+            })
+        }).then(function (resposta) {
+            console.log("Adicionou tags")
+        }).then(function () {
+            return fetch("arquivos/salvarImagemPost", {
+                method: "POST",
+                body: formData
+            })
+        }).then(function () {
+            console.log("Salvou a img do post")
+        }).then(function () {
+            window.location = "posts.html"
         })
+
+        tagues = []
+        taguesADD = []
+
+
     }
 </script>

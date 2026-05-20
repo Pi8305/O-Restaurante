@@ -3,7 +3,7 @@ var database = require("../database/config")
 function renderizar(req, res) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function renderizar(): ")
     var instrucaoSql = `
-        select * from postsView order by idPost desc limit 20;
+        select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost order by idPost desc limit 20;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -12,7 +12,7 @@ function renderizar(req, res) {
 function renderizarIndex(req, res) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function renderizarIndex(): ")
     var instrucaoSql = `
-        select * from postsView order by idPost desc limit 12;
+        select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost order by idPost desc limit 12;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -21,7 +21,7 @@ function renderizarIndex(req, res) {
 function buscarPost(idPost, res) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarPost(): ")
     var instrucaoSql = `
-        select userr, idUsuario, idPost, nome, descricao, likes, tags from postsView where idPost = ${idPost};
+        select usuario.nome userr, usuario.idUsuario idUsuario, post.idPost, post.nome, post.descricao, post.likes, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = ${idPost};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -30,7 +30,63 @@ function buscarPost(idPost, res) {
 function buscarPostPorPesq(tag, res) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarPostPorPesq(): ")
     var instrucaoSql = `
-        select * from postsView where concat(',',tags, ',') like '%,${tag},%' order by idPost desc limit 20;
+        select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario where concat(',' ,tags, ',') like '%,${tag},%' group by post.idPost order by idPost desc limit 20;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function checkTags(tag, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function checkTags(): ")
+    var instrucaoSql = `
+        select tag from tags;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function salvarTags(tag, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function salvarTags(): ")
+    var instrucaoSql = `
+        insert into tags (tag) values 
+        ('${tag}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function salvarPost(nome, desc, idUsuario) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function salvarPost(): ")
+    var instrucaoSql = `
+        insert into post (fkUsuario, nome, descricao) values
+        (${idUsuario}, '${nome}', '${desc}');
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function adicionarTags(tags, idPost, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function adicionarTags(): ")
+    var instrucaoSql = `
+        insert into conexao (fkTags, fkPost) values (${tags}, ${idPost});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function verificarPostID(id, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function verificarPostID(): ")
+    var instrucaoSql = `
+        select idPost from post join usuario on fkUsuario = idUsuario where idUsuario = ${id} order by idPost desc limit 1;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function verificarID(tags, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function verificarID(): ")
+    var instrucaoSql = `
+        select idTag from tags where tag = '${tags}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -40,5 +96,11 @@ module.exports = {
     renderizar,
     renderizarIndex,
     buscarPost,
-    buscarPostPorPesq
+    buscarPostPorPesq,
+    checkTags,
+    salvarTags,
+    salvarPost,
+    adicionarTags,
+    verificarID,
+    verificarPostID
 };

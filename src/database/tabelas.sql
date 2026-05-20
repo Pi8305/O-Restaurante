@@ -30,15 +30,16 @@ create table usuario (
 create table post (
 	idPost int primary key auto_increment,
     fkUsuario int,
+    constraint fkUsuarioConst foreign key (fkUsuario) references usuario(idUsuario),
     nome varchar(45) not null,
     descricao varchar(200),
-    imagem varchar(255) not null,
+    imagem varchar(255),
     likes int
 );
 
 create table tags (
 	idTag int primary key auto_increment,
-    tag varchar(15)
+    tag varchar(15) unique
 );
 
 create table conexao (
@@ -62,13 +63,13 @@ drop table tags;
 drop table conexao;
 
 insert into post (fkUsuario, nome, descricao, imagem, likes) values
-(1, 'Primeiro post', 'Descrição daora', 4, 67);
+(1, 'Primeiro post', 'Descrição daora', 1, 67);
 
 insert into tags (tag) values
 ('legal');
 
 insert into conexao values
-(2, 2);
+(1, 1);
 
 select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost;
 
@@ -86,4 +87,11 @@ insert into tags (tag) values
 
 update usuario set imagem_perfil = 'x' where idUsuario = 'x';
 
-select * from post join conexao on conexao.fkPost = post.idPost join tags on conexao.fkTags = tags.idTag where conexao.fkTags = (select idTag from tags where tag = 'daora');
+select idTag from tags where tag = 'tag';
+
+select * from conexao;
+select * from tags;
+
+select idPost from postsView order by idPost desc limit 1;
+
+update post set imagem = 'x' where idPost = 'x';
