@@ -21,7 +21,7 @@ function renderizarIndex(req, res) {
 function buscarPost(idPost, res) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarPost(): ")
     var instrucaoSql = `
-        select usuario.nome userr, usuario.idUsuario idUsuario, post.idPost, post.nome, post.descricao, post.likes, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = ${idPost};
+        select usuario.nome userr, usuario.idUsuario idUsuario, post.idPost, post.nome, post.descricao, post.likes, post.imagem, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = ${idPost};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -30,7 +30,7 @@ function buscarPost(idPost, res) {
 function buscarPostPorPesq(tag, res) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarPostPorPesq(): ")
     var instrucaoSql = `
-        select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario where concat(',' ,tags, ',') like '%,${tag},%' group by post.idPost order by idPost desc limit 20;
+        select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having concat(',' ,tags, ',') like '%,${tag},%' order by idPost desc limit 20;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

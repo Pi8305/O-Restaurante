@@ -14,19 +14,36 @@
 </head>
 
 <body>
-    <input type="file" id="arquivo">
-    <button onclick="enviar()">enviar</button><br><br>
-    <input type="file" id="arquivoPost"><br>
-    <input type="text" id="nomePost"><br>
-    <input type="text" id="descricaoPost"><br>
-    <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button><br>
-    <div id="tagsss"></div><br>
-    <button onclick="enviarPost()">enviar</button>
+    <header>
+
+    </header>
+    <main>
+        <input type="file" id="arquivo">
+        <button onclick="enviar()">enviar</button><br><br>
+        <input type="file" id="arquivoPost"><br>
+        <input type="text" id="nomePost"><br>
+        <input type="text" id="descricaoPost"><br>
+        <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button><br>
+        <div id="tagsss"></div><br>
+        <button onclick="enviarPost()">enviar</button>
+    </main>
+    <footer>
+        <div class="footer">
+            <div>
+
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
 
 <script>
+
+    sessionStorage.PESQUISANDO = false
+
+    /* nome_usuario.innerHTML = `<a href="config.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>` */
+
     let tagues = []
     let taguesADD = []
 
@@ -49,6 +66,10 @@
 
     function AddTag() {
         let tague = tagsUsuario.value
+
+        if (tague == '') {
+            return false;
+        }
 
         fetch(`posts/checkTags`)
             .then(function (resposta) {
@@ -75,6 +96,11 @@
     }
 
     function enviarPost() {
+
+        if (tagues == []) {
+            return false;
+        }
+
         let usuarioAtual = sessionStorage.ID_USUARIO
         const formData = new FormData()
         formData.append('foto', arquivoPost.files[0])
@@ -85,18 +111,20 @@
         let taguesF = `${tagues}`
         let taguesADDF = `${taguesADD}`
 
-        fetch("posts/salvarTags", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                tagServerAdd: taguesADDF
+        if (!(taguesADD.length == 0)) {
+            console.log(`entrou aqui`)
+            fetch("posts/salvarTags", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    tagServerAdd: taguesADDF
+                })
+            }).then(function (resposta) {
+                console.log("Salvou as tags")
             })
-        }).then(function (resposta) {
-            console.log("Salvou as tags")
-        })
-
+        }
 
         fetch("posts/salvarPost", {
             method: "POST",
