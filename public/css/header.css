@@ -4,7 +4,7 @@
 
 .border-head {
     display: flex;
-    height: 100px;
+    height: 6vw;
     border-bottom: solid 2px #d5c289;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 200px;
+    gap: 15vw;
     align-items: center;
     height: auto;
     width: 1600px;
@@ -25,41 +25,42 @@
 }
 
 .imagem-he {
-    height: 90px;
+    height: 5vw;
 }
 
 .r-side {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 1vw;
 }
 
 .r-side-logado {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 1.5vw;
 }
 
 .mid {
     display: flex;
     align-self: center;
-    transform: translateX(-9px);
+    /* transform: translateX(-0.05vw); */
 }
 
 .mid input {
-    width: 400px;
+    width: 20vw;
     height: auto;
 }
 
 .img_usuario{
-    width: 80px;
-    height: 80px;
+    width: 4vw;
+    height: 4vw;
     object-fit: cover;
 }
 
 .usuario-nome {
     color: black;
     text-decoration: none;
+    font-size: 1.2vw;
 }
 
 .apagar {
