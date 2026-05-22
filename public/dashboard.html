@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/dash.css">
+    <link rel="stylesheet" href="css/post.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="tudo">
+        <div class="caixa">
+            <div class="barras">
+                <canvas id="barras"></canvas>
+            </div>
+            <div class="linhas">
+                <canvas id="linhas"></canvas>
+            </div>
+        </div>
+        <div class="bot">
+            <div class="post" id="divPost">
+                <span>Post com mais likes:</span>
+                <span><a href="oTalPost.html">POST</a> com XX likes</span>
+            </div>
+            <div class="tag" id="divTag">
+                <span>Tag com mais likes:</span>
+                <span><a href="aTalDaTag.html">TAG</a> com XX likes</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    let graf1 = document.getElementById('barras');
+    let graf2 = document.getElementById('linhas');
+    let temp = ''
+
+    /* if (sessionStorage.ID_USUARIO == 1) { */
+
+    function mandarPost(idPost) {
+        sessionStorage.ID_POST = idPost
+        window.location = "post.html"
+    }
+
+    function mandarTag(tag) {
+        sessionStorage.PESQUISANDO = 'true'
+        sessionStorage.PESQUISA_ATUAL = tag
+
+        window.location = "posts.html"
+    }
+
+    function plotarInicial() {
+        fetch("graficos/likesPost")
+            .then(function (resposta) {
+                return resposta.json()
+            }).then(function (res) {
+                divPost.innerHTML = `<span>Post com mais likes:</span>
+                                <span><span onclick="mandarPost(${res[0].idPost})" class="tag-link">${res[0].nome}</span> com ${res[0].likes} likes</span>`
+            })
+        fetch("graficos/likesTag")
+            .then(function (resposta) {
+                return resposta.json()
+            }).then(function (res) {
+                divTag.innerHTML = `<span>Tag com mais likes:</span>
+                                <span><span onclick="mandarTag('${res[0].tag}')" class="tag-link">${res[0].tag}</span> com ${res[0].likesTag} likes</span>`
+            })
+        fetch("graficos/tags")
+            .then(function (resposta) {
+                return resposta.json()
+            })
+            .then(function (res) {
+                new Chart(graf1, {
+                    type: 'bar',
+                    data: {
+                        labels: [res[0].tag, res[1].tag, res[2].tag, res[3].tag, res[4].tag, res[5].tag],
+                        datasets: [
+                            {
+                                label: 'Tags mais usadas',
+                                data: [res[0].postsComTag, res[1].postsComTag, res[2].postsComTag, res[3].postsComTag, res[4].postsComTag, res[5].postsComTag],
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+
+        fetch("graficos/posts")
+            .then(function (resposta) {
+                return resposta.json()
+            }).then(function (res) {
+                temp = res
+                return fetch("graficos/usuarios")
+                    .then(function (resposta) {
+                        return resposta.json()
+                    }).then(function (res) {
+                        new Chart(graf2, {
+                            type: 'line',
+                            data: {
+                                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                                datasets: [
+                                    {
+                                        label: 'Usuarios novos por mês',
+                                        data: [res[0].usuMes, res[1].usuMes, res[2].usuMes, res[3].usuMes, res[4].usuMes, res[5].usuMes, res[6].usuMes, res[7].usuMes, res[8].usuMes, res[9].usuMes, res[10].usuMes, res[11].usuMes],
+                                        borderWidth: 2,
+                                    },
+                                    {
+                                        label: 'Posts por mês',
+                                        data: [temp[0].postMes, temp[1].postMes, temp[2].postMes, temp[3].postMes, temp[4].postMes, temp[5].postMes, temp[6].postMes, temp[7].postMes, temp[8].postMes, temp[9].postMes, temp[10].postMes, temp[11].postMes]
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+
+                        temp = ''
+                    })
+            })
+
+    }
+
+    function continuarPlotando() {
+        fetch("graficos/likesPost")
+            .then(function (resposta) {
+                return resposta.json()
+            }).then(function (res) {
+                divPost.innerHTML = `<span>Post com mais likes:</span>
+                                <span><span onclick="mandarPost(${res[0].idPost})" class="tag-link">${res[0].nome}</span> com ${res[0].likes} likes</span>`
+            })
+        fetch("graficos/likesTag")
+            .then(function (resposta) {
+                return resposta.json()
+            }).then(function (res) {
+                divTag.innerHTML = `<span>Tag com mais likes:</span>
+                                <span><span onclick="mandarTag('${res[0].tag}')" class="tag-link">${res[0].tag}</span> com ${res[0].likesTag} likes</span>`
+            })
+    }
+
+    plotarInicial()
+    /* } else {
+        window.location = "login.html"
+    }
+
+ */
+
+
+</script>

@@ -34,7 +34,8 @@ create table post (
     nome varchar(45) not null,
     descricao varchar(200),
     imagem varchar(255),
-    likes int
+    likes int,
+    dtPost datetime default current_timestamp not null
 );
 
 create table tags (
@@ -51,8 +52,8 @@ create table conexao (
 insert into links (idLinks) values
 (default);
 
-insert into usuario (nome, email, senha, fkLinks) values 
-('aaaa', 'aaaa@bbbb', 'bbbb', last_insert_id());
+insert into usuario (nome, email, senha, dtCriacao, fkLinks) values 
+('llll', 'hhhh@ffff', 'bbbb', '26-12-01 22:55:09', last_insert_id());
 
 select * from usuario join links on usuario.fkLinks = links.idLinks; 
 
@@ -93,6 +94,7 @@ select * from conexao;
 select * from tags;
 select * from post;
 select * from usuario;
+select * from links;
 
 select idPost from postsView order by idPost desc limit 1;
 
@@ -100,4 +102,12 @@ update post set imagem = '1.png' where idPost = '1';
 
 select idPost from post join usuario on fkUsuario = idUsuario where idUsuario = 1 order by idPost desc limit 1;
 
-select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having concat(',' ,tags, ',') like '%,${tag},%' order by idPost desc limit 20;
+delete from tags where idtag = 5;
+
+select tags.tag, count(conexao.fkPost) postsComTag from tags left join conexao ON tags.idTag = conexao.fkTags group by tags.idTag order by postsComTag desc limit 6;
+
+select month(usuario.dtCriacao) mes, count(usuario.idUsuario) usuMes from usuario group by mes order by mes;
+select month(post.dtPost) mes, count(post.idPost) postMes from post group by mes order by mes;
+
+select * from post order by likes desc limit 1;
+select tags.tag, sum(post.likes) likesTag from post left join conexao on conexao.fkPost = post.idPost left join tags on conexao.fkTags = tags.idTag group by tags.tag order by likesTag desc limit 1;

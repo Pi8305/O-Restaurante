@@ -1,0 +1,48 @@
+.tudo {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 11vw;
+}
+
+.caixa {
+    padding-top: 5vw;
+    display: flex;
+    align-items: center;
+    gap: 5vw;
+}
+
+.barras {
+    width: 40vw;
+}
+
+.linhas {
+    width: 40vw;
+}
+
+.bot {
+    border-top: 2px solid #d5c289;
+    background-color: #e0ce98;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20vw;
+    width: 100vw;
+    height: 12.8vw;
+}
+
+.bot * {
+    background-color: #e0ce98;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.tag {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
