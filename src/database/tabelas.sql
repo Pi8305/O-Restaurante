@@ -53,7 +53,18 @@ insert into links (idLinks) values
 (default);
 
 insert into usuario (nome, email, senha, dtCriacao, fkLinks) values 
-('llll', 'hhhh@ffff', 'bbbb', '26-12-01 22:55:09', last_insert_id());
+('aaaa', 'aaaa@bbbb', 'bbbb', '26-12-01 22:55:09', 1),
+('bbbb', 'cccc@dddd', 'bbbb', '26-11-01 22:55:09', 2),
+('cccc', 'eeee@ffff', 'bbbb', '26-10-01 22:55:09', 3),
+('dddd', 'gggg@hhhh', 'bbbb', '26-09-01 22:55:09', 4),
+('eeee', 'iiii@jjjj', 'bbbb', '26-08-01 22:55:09', 5),
+('ffff', 'kkkk@llll', 'bbbb', '26-07-01 22:55:09', 6),
+('gggg', 'bbbb@aaaa', 'bbbb', '26-06-01 22:55:09', 7),
+('hhhh', 'dddd@cccc', 'bbbb', '26-05-01 22:55:09', 8),
+('iiii', 'ffff@eeee', 'bbbb', '26-04-01 22:55:09', 9),
+('jjjj', 'hhhh@ffff', 'bbbb', '26-03-01 22:55:09', 10),
+('kkkk', 'gggg@ffff', 'bbbb', '26-02-01 22:55:09', 11),
+('llll', 'iiii@ffff', 'bbbb', '26-01-01 22:55:09', 12);
 
 select * from usuario join links on usuario.fkLinks = links.idLinks; 
 
@@ -64,13 +75,18 @@ drop table tags;
 drop table conexao;
 
 insert into post (fkUsuario, nome, descricao, imagem, likes) values
-(1, 'Primeiro post', 'Descrição daora', 1, 67);
+(18, 'Primeiro post', 'Descrição daora', '1.png', 2),
+(18, 'Primeiro post', 'Descrição daora', '2.png', 2),
+(18, 'Primeiro post', 'Descrição daora', '3.png', 2),
+(18, 'Primeiro post', 'Descrição daora', '4.png', 2),
+(18, 'Primeiro post', 'Descrição daora', '', 2);
+
 
 insert into tags (tag) values
 ('legal');
 
 insert into conexao values
-(1, 1);
+(29, 2);
 
 select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = 1;
 
