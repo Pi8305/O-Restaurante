@@ -38,9 +38,10 @@
                 <div class="elementos">
                     <div class="alerta_erro">
                         <div class="card_erro" id="cardErro">
-                            <span id="mensagem_erro"></span>
+                            <span class="alerta-erro">Os campos precisam ser preenchidos para realizar o log-in</span>
                         </div>
                     </div>
+                    <div>
                     <div>
                         Insira seus dados para realizar o login
                     </div>
@@ -58,6 +59,7 @@
                     <div>
                         <a href="cadastro.html">Ou registre-se aqui</a>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,7 +75,7 @@
         var senhaVar = inp_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            mensagem_erro.innerHTML = "<span style='color: red;'>Os campos precisam ser preenchidos para realizar o log-in</span>";
+            mensagem_erro.getElementById('cardErro').style.display = "show"
             return false;
         } else {
 
