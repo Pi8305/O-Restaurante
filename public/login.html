@@ -11,59 +11,65 @@
 </head>
 
 <body>
-    <header>
-        <div class="border-head">
-            <div class="header">
-                <div class="l-side">
-                    <a href="index.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
-                </div>
-                <div class="mid">
-                    <input type="text" id="search">
-                </div>
-                <div class="r-side">
-                    <div class="login-button apagar">
-                        <span>Login</span>
-                    </div>
-                    <div class="register-button">
-                        <a href="cadastro.html">Registrar</a>
-                    </div>
-                </div>
-            </div>
+  <header>
+    <div class="border-head">
+      <div class="header">
+        <div class="l-side">
+          <a href="index.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
         </div>
-    </header>
+        <div class="mid">
+          <input type="text" id="search">
+        </div>
+        <div class="r-side">
+          <div class="login-button">
+            <a href="login.html">Login</a>
+          </div>
+          <div class="register-button apagar">
+            <span>Registrar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <main>
-        <div class="login-main">
-            <div class="borda">
-                <div class="elementos">
-                    <div class="alerta_erro">
-                        <div class="card_erro" id="cardErro">
-                            <span class="alerta-erro">Os campos precisam ser preenchidos para realizar o log-in</span>
-                        </div>
-                    </div>
-                    <div>
-                    <div>
-                        Insira seus dados para realizar o login
-                    </div>
-                    <div>
-                        <label for="inp_email">Email:</label>
-                        <input type="text" id="inp_email" class="tamanho">
-                    </div>
-                    <div>
-                        <label for="inp_email">Senha:</label>
-                        <input type="text" id="inp_senha" class="tamanho">
-                    </div>
-                    <div>
-                        <button onclick="entrar()" class="tamanho-botao">Entrar</button>
-                    </div>
-                    <div>
-                        <a href="cadastro.html">Ou registre-se aqui</a>
-                    </div>
-                    </div>
-                </div>
+  <main>
+    <div class="login-main">
+      <div class="borda">
+        <div class="elementos">
+          <div class="alerta_erro-login">
+            <div class="card_erro-login" id="cardErro">
+              <span id="mensagem_erro"></span>
+            </div>
+          </div>
+          <div>
+            Insira os dados para o login
+          </div>
+          <div>
+            <label for="inp_email" class="mover">Email:</label>
+            <input type="text" id="inp_email" class="tamanho mover" placeholder="aaaa@bbbb.ccc">
+          </div>
+          <div class="confirmar-senha">
+            <div>
+              <label for="inp_senha" class="mover">Senha:</label>
+              <input type="text" id="inp_senha" class="tamanho mover" placeholder="********">
+            </div>
+          </div>
+          <div>
+            <div id="botao"><button onclick="entrar()" class="tamanho-botao">Entrar</button></div>
+          </div>
+          <div>
+            <a href="cadastro.html">Ou faça o cadastro aqui!</a>
+          </div>
+        </div>
+      </div>
+  </main>
+  <footer>
+        <div class="footer">
+            <div>
+
             </div>
         </div>
-    </main>
+    </footer>
 </body>
 
 </html>
@@ -75,7 +81,7 @@
         var senhaVar = inp_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            mensagem_erro.getElementById('cardErro').style.display = "show"
+            cardErro.innerHTML = `<span>Os campos precisam ser preenchidos para realizar o login</span>`
             return false;
         } else {
 

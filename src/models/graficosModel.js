@@ -3,7 +3,7 @@ var database = require("../database/config");
 function graficoTags(resposta) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function graficoTags(): ")
     var instrucaoSql = `
-        select tags.tag, count(conexao.fkPost) postsComTag from tags left join conexao ON tags.idTag = conexao.fkTags group by tags.idTag order by postsComTag desc limit 6;
+        select tags.tag tag, count(conexao.fkPost) postsComTag from tags left join conexao ON tags.idTag = conexao.fkTags group by tags.idTag order by postsComTag desc limit 6;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

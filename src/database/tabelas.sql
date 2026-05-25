@@ -50,6 +50,17 @@ create table conexao (
 );
 
 insert into links (idLinks) values
+(default),
+(default),
+(default),
+(default),
+(default),
+(default),
+(default),
+(default),
+(default),
+(default),
+(default),
 (default);
 
 insert into usuario (nome, email, senha, dtCriacao, fkLinks) values 
@@ -66,29 +77,57 @@ insert into usuario (nome, email, senha, dtCriacao, fkLinks) values
 ('kkkk', 'gggg@ffff', 'bbbb', '26-02-01 22:55:09', 11),
 ('llll', 'iiii@ffff', 'bbbb', '26-01-01 22:55:09', 12);
 
+insert into post (fkUsuario, nome, descricao, imagem, likes, dtPost) values
+(1, 'Primeiro post', 'Descrição daora', '1.png', 2, '26-01-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '2.png', 2, '26-02-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '3.png', 2, '26-03-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '4.png', 2, '26-04-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', 2, '26-05-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', 2, '26-06-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', 2, '26-07-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', 2, '26-08-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', 2, '26-09-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', 2, '26-10-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', 2, '26-11-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', 2, '26-12-25 22:00');
+
+insert into tags (tag) values
+('legal'),
+('daora'),
+('maximo'),
+('mds'),
+('ata'),
+('bacana');
+
+insert into conexao values
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(2, 2),
+(4, 2),
+(6, 2),
+(8, 2),
+(10, 2),
+(12, 2);
+
 select * from usuario join links on usuario.fkLinks = links.idLinks; 
 
-drop table usuario;
-drop table links;
 drop table post;
 drop table tags;
 drop table conexao;
+drop table usuario;
+drop table links;
 
-insert into post (fkUsuario, nome, descricao, imagem, likes) values
-(18, 'Primeiro post', 'Descrição daora', '1.png', 2),
-(18, 'Primeiro post', 'Descrição daora', '2.png', 2),
-(18, 'Primeiro post', 'Descrição daora', '3.png', 2),
-(18, 'Primeiro post', 'Descrição daora', '4.png', 2),
-(18, 'Primeiro post', 'Descrição daora', '', 2);
-
-
-insert into tags (tag) values
-('legal');
-
-insert into conexao values
-(29, 2);
-
-select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = 1;
+select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = 2;
 
 drop view postsView;
 create view postsView as (select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost);
@@ -98,9 +137,6 @@ select * from postsView order by idPost limit 20;
 select * from postsView where idPost > 20 order by idPost limit 20;
 select userr, idUsuario, idPost, nome, descricao, likes, tags from postsView where idPost = 1;
 select * from postsView where concat(',',tags, ',') like '%,daora,%' order by idPost desc limit 20;
-
-insert into tags (tag) values
-('daora');
 
 update usuario set imagem_perfil = 'x' where idUsuario = 'x';
 
