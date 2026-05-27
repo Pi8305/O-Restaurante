@@ -87,15 +87,25 @@ function cadastrar(req, res) {
     }
 }
 
-function verificarIDPost(id, res) {
-    usuarioModel.verificarIDPost(id)
-    .then(function(resultado){
+function extras(req, res) {
+    let mandar = req.body.extrasServer
+    let id = req.body.idUsuarioServer
+
+    mandar = mandar.split(',')
+
+    usuarioModel.extras(mandar, id)
+    .then(function(resultado) {
         res.status(200).json(resultado)
     })
 }
 
-function verificarID(req, res) {
-    usuarioModel.verificarIDPost(id)
+function links(req, res) {
+    let mandar = req.body.linksServer
+    let id = req.body.idUsuarioServer
+
+    mandar = mandar.split(',')
+
+    usuarioModel.links(mandar, id)
     .then(function(resultado) {
         res.status(200).json(resultado)
     })
@@ -104,5 +114,6 @@ function verificarID(req, res) {
 module.exports = {
     autenticar,
     cadastrar,
-    verificarIDPost
+    extras,
+    links
 }

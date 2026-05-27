@@ -35,14 +35,54 @@
         </div>
     </header>
     <main>
-        <input type="file" id="arquivo">
-        <button onclick="enviar()">enviar</button><br><br>
-        <input type="file" id="arquivoPost"><br>
-        <input type="text" id="nomePost"><br>
-        <input type="text" id="descricaoPost"><br>
-        <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button><br>
-        <div id="tagsss"></div><br>
-        <button onclick="enviarPost()">enviar</button>
+        <div id="divUsuario" class="div-usuario">
+            <div id="divImg" class="div-imagem">
+                <img src="img/placeholder.png" alt="">
+            </div>
+            <div id="divPronomes">
+                <span>none</span>
+            </div>
+            <div id="divIdade">
+                <span>none</span>
+            </div>
+            <div id="divDesc">
+                <span>none</span>
+            </div>
+            <div id="divLinks">
+                
+            </div>
+        </div>
+        <div class="div_info">
+            <div class="div-arquivo">
+                <input type="file" id="arquivo" class="inp-arquivo">
+                <button onclick="enviar()">enviar</button>
+            </div>
+            <div class="div-extras">
+                <input type="text" id="inpDesc" placeholder="descrição">
+                <input type="number" id="inpIdade" placeholder="idade">
+                <input type="text" id="inpPronomes" placeholder="pronomes">
+                <button onclick="salvarExtras()">Salvar</button>
+            </div>
+            <div class="div-links">
+                <input type="text" id="div_linktree" placeholder="linktree">
+                <input type="text" id="div_instagram" placeholder="instagram">
+                <input type="text" id="div_twitter" placeholder="twitter">
+                <input type="text" id="div_bluesky" placeholder="bluesky">
+                <input type="text" id="div_youtube" placeholder="youtube">
+                <input type="text" id="div_discord" placeholder="discord">
+                <input type="text" id="div_outros1" placeholder="outro link">
+                <input type="text" id="div_outros2" placeholder="outro link">
+                <button onclick="salvarLinks()">Salvar</button>
+            </div>
+        </div>
+        <div class="div-post">
+            <input type="file" id="arquivoPost"><br>
+            <input type="text" id="nomePost"><br>
+            <input type="text" id="descricaoPost"><br>
+            <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button><br>
+            <div id="tagsss"></div><br>
+            <button onclick="enviarPost()">enviar</button>
+        </div>
     </main>
     <footer>
         <div class="footer">
@@ -56,6 +96,9 @@
 </html>
 
 <script>
+    /* if (!(sessionStorage.EMAIL_USUARIO)) {
+        window.location = "login.html";
+    } */
 
     sessionStorage.PESQUISANDO = false
 
@@ -64,6 +107,35 @@
     nome_usuario.innerHTML = `<a href="config.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
 
     imagem_usuario.innerHTML = `<a href="config.html"><img src="img/pfp/${sessionStorage.PFP}" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
+
+    divImg.innerHTML = `<img src="img/pfp/${sessionStorage.PFP}" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';">`
+
+    if (sessionStorage.PRONOMES_USUARIO == 'nada') {
+        divPronomes.innerHTML = ''
+    } else {
+        divPronomes.innerHTML = `<span>${sessionStorage.PRONOMES_USUARIO}</span>`
+    }
+
+    if (sessionStorage.DESC_USUARIO == 'nada') {
+        divDesc.innerHTML = ''
+    } else {
+        divDesc.innerHTML = `<span>${sessionStorage.DESC_USUARIO}</span>`
+    }
+
+    if (sessionStorage.IDADE_USUARIO == 'nada') {
+        divIdade.innerHTML = ''
+    } else {
+        divIdade.innerHTML = `<span>${sessionStorage.IDADE_USUARIO}</span>`
+    }
+
+    let coisos = ['LINK_USUARIO', 'INSTA_USUARIO', 'TWT_USUARIO', 'BSKY_USUARIO', 'YT_USUARIO', 'DISC_USUARIO', 'OUTROS1_USUARIO', 'OUTROS2_USUARIO']
+
+    for (i = 0; i < coisos.length; i++) {
+        let coiso = coisos[i]
+        if (sessionStorage[coiso] != 'nada') {
+            divLinks.innerHTML += sessionStorage[coiso]
+        }
+    }
 
     let tagues = []
     let taguesADD = []
@@ -185,7 +257,87 @@
 
         tagues = []
         taguesADD = []
+    }
 
+    function salvarExtras() {
+        let desc = inpDesc.value
+        let idade = inpIdade.value
+        let pronomes = inpPronomes.value
 
+        if (desc == '') {
+            desc = "nada"
+        }
+        if (idade == '') {
+            idade = 0
+        }
+        if (pronomes == '') {
+            pronomes = 'nada'
+        }
+
+        let mandar = `${desc},${idade},${pronomes}`
+
+        fetch("usuarios/extras", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                extrasServer: mandar,
+                idUsuarioServer: sessionStorage.ID_USUARIO
+            })
+        }).then(function (resultado) {
+            limparSessao()
+        })
+    }
+
+    function salvarLinks() {
+        let linktree = div_linktree.value
+        let instagram = div_instagram.value
+        let twitter = div_twitter.value
+        let bluesky = div_bluesky.value
+        let youtube = div_youtube.value
+        let discord = div_discord.value
+        let outros1 = div_outros1.value
+        let outros2 = div_outros2.value
+
+        if (linktree == '') {
+            linktree = 'nada'
+        }
+        if (instagram == '') {
+            instagram = 'nada'
+        }
+        if (twitter == '') {
+            twitter = 'nada'
+        }
+        if (bluesky == '') {
+            bluesky = 'nada'
+        }
+        if (youtube == '') {
+            youtube = 'nada'
+        }
+        if (discord == '') {
+            discord = 'nada'
+        }
+        if (outros1 == '') {
+            outros1 = 'nada'
+        }
+        if (outros2 == '') {
+            outros2 = 'nada'
+        }
+
+        let mandar = `${linktree},${instagram},${twitter},${bluesky},${youtube},${discord},${outros1},${outros2}`
+
+        fetch("usuarios/links", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                linksServer: mandar,
+                idUsuarioServer: sessionStorage.ID_USUARIO
+            })
+        }).then(function(resposta) {
+            limparSessao()
+        })
     }
 </script>

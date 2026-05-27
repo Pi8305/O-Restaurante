@@ -163,3 +163,5 @@ select month(post.dtPost) mes, count(post.idPost) postMes from post group by mes
 
 select * from post order by likes desc limit 1;
 select tags.tag, sum(post.likes) likesTag from post left join conexao on conexao.fkPost = post.idPost left join tags on conexao.fkTags = tags.idTag group by tags.tag order by likesTag desc limit 1;
+
+SELECT idUsuario, nome, email, senha, dtCriacao, ifnull(descricao, 'nada') descricao, ifnull(idade, 0) idade, ifnull(pronomes, 'nada') pronomes, imagem_perfil pfp, ifnull(links.linktree, 'nada') linktree, ifnull(links.instagram, 'nada') instagram, ifnull(links.twitter, 'nada') twitter, ifnull(links.bluesky, 'nada') bluesky, ifnull(links.youtube, 'nada') youtube, ifnull(links.discord, 'nada') discord, ifnull(links.outros1, 'nada') outros1, ifnull(links.outros2, 'nada') outros2 FROM usuario JOIN links ON usuario.fkLinks = links.idLinks WHERE usuario.email = '${email}' AND usuario.senha = '${senha}'
