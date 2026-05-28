@@ -1,0 +1,129 @@
+main {
+    border: 2px solid #f7f5ed;
+    background-color: #f7f5ed;
+    margin: 1vw;
+    padding: 1vw;
+    border-radius: 1vw;
+}
+
+main * {
+    background-color: #f7f5ed;
+}
+
+.div-usuario {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5vw;
+}
+
+.div-usuario * {
+    display: flex;
+}
+.pfp-info {
+    flex-direction: column;
+    align-items: center;
+}
+.div-imagem {
+    overflow: hidden;
+    margin-left: 4vw;
+}
+
+.div-imagem img {
+    width: 30vw;
+    height: 30vw;
+    object-fit: cover;
+}
+
+.div-arquivo {
+    margin-left: 4vw;
+}
+
+.div-info-usuario {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.2vw;
+}
+
+.div-nome {
+    font-size: 3vw;
+    padding-bottom: 1vw;
+}
+
+.div-pronomes {
+    font-size: 1.5vw;
+}
+
+.div-info-outros {
+    font-size: 1.7vw;
+}
+
+.div-info-links {
+    display: block;
+    font-size: 1.5vw;
+    margin-right: 4vw;
+}
+
+.mais-espaco {
+    font-size: 2vw;
+    margin-left: 2.4vw;
+}
+
+.titulo {
+    justify-content: flex-start;
+    padding-left: 1.5vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+}
+
+.titulo span {
+    font-size: 3vw;
+    
+}
+
+.enviaveis {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.div-info {
+    display: flex;
+}
+
+.div-info * {
+    display: flex;
+}
+
+.div-extras div {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 26vw;
+}
+
+.div-inp-links {
+    flex-direction: column;
+    align-items: center;
+}
+
+.div-inp-links div {
+    height: fit-content;
+    width: 26.1vw;
+    flex-wrap: wrap;
+}
+
+.div-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    width: 30vw;
+}
+
+.div-post * {
+    display: flex;
+}

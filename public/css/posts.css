@@ -1,7 +1,8 @@
 .posts {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 2vw;
     text-decoration: none;
 }
 
@@ -10,8 +11,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 450px;
-    height: 470px;
+    width: 30vw;
+    height: 32vw;
     border: 2px solid #f7f5ed;
     background-color: #f7f5ed;
 }
@@ -23,8 +24,8 @@
 
 .img-post img {
     background-color: #f7f5ed;
-    width: 390px;
-    height: 390px;
+    width: 25.5vw;
+    height: 25.5vw;
     object-fit: cover;
     border: solid 2px #e6daa6;
 }
@@ -32,21 +33,21 @@
 .txt-post {
     background-color: #f7f5ed;
     display: flex;
-    padding-top: 20px;
-    gap: 10px;
+    padding-top: 0.8vw;
+    gap: 0.5vw;
 }
 
 .txt-post span {
     background-color: #f7f5ed;
-    font-size: 20px;
+    font-size: 1.5vw;
     color: #2c2519;
 }
 
 .ver-todos {
     display: flex;
     justify-content: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 2.5vw;
+    padding-bottom: 2.5vw;
 }
 
 .ver-todos a {
@@ -55,20 +56,20 @@
 }
 
 .ver-todos span {
-    font-size: 40px;
+    font-size: 2.5vw;
 }
 
 .ver-mais {
     display: flex;
     justify-content: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 2.5vw;
+    padding-bottom: 2.5vw;
 }
 
 .ver-mais span {
     cursor: pointer;
     color: #2c2519;
-    font-size: 40px;
+    font-size: 2.5vw;
 }
 
 /* #f3f0e4 */

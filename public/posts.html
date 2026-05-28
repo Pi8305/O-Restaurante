@@ -63,7 +63,7 @@
 
         nome_usuario.innerHTML = `<a href="config.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
 
-        imagem_usuario.innerHTML = `<a href="config.html"><img src="img/pfp/${sessionStorage.ID_USUARIO}.png" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
+        imagem_usuario.innerHTML = `<a href="config.html"><img src="img/pfp/${sessionStorage.PFP}" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
 
         console.log(sessionStorage.PESQUISANDO)
         if (sessionStorage.PESQUISANDO == 'false') {
