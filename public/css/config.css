@@ -1,4 +1,4 @@
-main {
+.borda-main {
     border: 2px solid #f7f5ed;
     background-color: #f7f5ed;
     margin: 1vw;
@@ -6,7 +6,7 @@ main {
     border-radius: 1vw;
 }
 
-main * {
+.borda-main * {
     background-color: #f7f5ed;
 }
 
@@ -72,10 +72,13 @@ main * {
 }
 
 .titulo {
-    justify-content: flex-start;
-    padding-left: 1.5vw;
+    display: flex;
+    justify-content: center;
+    gap: 20vw;
+    transform: translateX(-1vw);
     padding-top: 1vw;
     padding-bottom: 1vw;
+    background-color: transparent;
 }
 
 .titulo span {
@@ -88,6 +91,7 @@ main * {
     align-items: center;
     flex-direction: row;
     justify-content: center;
+    gap: 11vw;
 }
 
 .div-info {
@@ -121,9 +125,37 @@ main * {
     flex-direction: column;
     align-items: center;
     height: fit-content;
-    width: 30vw;
+    width: 20vw;
+    gap: 0.3vw;
+    padding: 2vw;
+    background-color: #fdfcf5;
+    transform: translateX(2.6vw);
+    border: 2px solid #fdfcf5;
+    display: flex;
+}
+
+.div-post * {
+    background-color: #fdfcf5;
 }
 
 .div-post * {
     display: flex;
+}
+
+.div-titulo-posts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5vw;
+    margin-bottom: 0.7vw;
+}
+
+.div-titulo-posts span {
+    font-size: 3vw;
+}
+
+.posts-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

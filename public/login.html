@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/login.css">
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/login.css">
+  <title>Login</title>
 </head>
 
 <body>
@@ -64,82 +64,86 @@
       </div>
   </main>
   <footer>
-        <div class="footer">
-            <div>
+    <div class="footer">
+      <div>
 
-            </div>
-        </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
 
 <script>
-    function entrar() {
+  function entrar() {
 
-        var emailVar = inp_email.value;
-        var senhaVar = inp_senha.value;
+    var emailVar = inp_email.value;
+    var senhaVar = inp_senha.value;
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.innerHTML = `<span>Os campos precisam ser preenchidos para realizar o login</span>`
-            return false;
+    if (emailVar == "" || senhaVar == "") {
+      cardErro.innerHTML = `<span>Os campos precisam ser preenchidos para realizar o login</span>`
+      return false;
+    } else {
+
+      console.log("FORM LOGIN: ", emailVar);
+      console.log("FORM SENHA: ", senhaVar);
+
+      fetch("/usuarios/autenticar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          emailServer: emailVar,
+          senhaServer: senhaVar
+        })
+      }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          if (resposta == []) {
+            
+          } else {
+
+            resposta.json().then(json => {
+              console.log(json);
+              console.log(JSON.stringify(json));
+              sessionStorage.EMAIL_USUARIO = json.email;
+              sessionStorage.NOME_USUARIO = json.nome;
+              sessionStorage.ID_USUARIO = json.idUsuario;
+              sessionStorage.DESC_USUARIO = json.descricao;
+              sessionStorage.DT_USUARIO = json.dtCriacao;
+              sessionStorage.IDADE_USUARIO = json.idade;
+              sessionStorage.PRONOMES_USUARIO = json.pronomes;
+              sessionStorage.PFP = json.pfp;
+              sessionStorage.LINK_USUARIO = json.linktree;
+              sessionStorage.INSTA_USUARIO = json.instagram;
+              sessionStorage.TWT_USUARIO = json.twitter;
+              sessionStorage.BSKY_USUARIO = json.bluesky;
+              sessionStorage.YT_USUARIO = json.youtube;
+              sessionStorage.DISC_USUARIO = json.discord;
+              sessionStorage.OUTROS1_USUARIO = json.outros1;
+              sessionStorage.OUTROS2_USUARIO = json.outros2;
+
+              window.location = "./index-logado.html";
+            });
+          }
         } else {
+          cardErro.innerHTML = `<span>Senha e/ou email incorreto(s)</span>`
+          console.log("Houve um erro ao tentar realizar o login!");
 
-            console.log("FORM LOGIN: ", emailVar);
-            console.log("FORM SENHA: ", senhaVar);
-
-            fetch("/usuarios/autenticar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emailServer: emailVar,
-                    senhaServer: senhaVar
-                })
-            }).then(function (resposta) {
-                console.log("ESTOU NO THEN DO entrar()!")
-
-                if (resposta.ok) {
-                    console.log(resposta);
-
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-                        sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.ID_USUARIO = json.idUsuario;
-                        sessionStorage.DESC_USUARIO = json.descricao;
-                        sessionStorage.DT_USUARIO = json.dtCriacao;
-                        sessionStorage.IDADE_USUARIO = json.idade;
-                        sessionStorage.PRONOMES_USUARIO = json.pronomes;
-                        sessionStorage.PFP = json.pfp;
-                        sessionStorage.LINK_USUARIO = json.linktree;
-                        sessionStorage.INSTA_USUARIO = json.instagram;
-                        sessionStorage.TWT_USUARIO = json.twitter;
-                        sessionStorage.BSKY_USUARIO = json.bluesky;
-                        sessionStorage.YT_USUARIO = json.youtube;
-                        sessionStorage.DISC_USUARIO = json.discord;
-                        sessionStorage.OUTROS1_USUARIO = json.outros1;
-                        sessionStorage.OUTROS2_USUARIO = json.outros2;
-
-                        window.location = "./index-logado.html";
-                    });
-
-                } else {
-
-                    console.log("Houve um erro ao tentar realizar o login!");
-
-                    resposta.text().then(texto => {
-                        console.error(texto);
-                    });
-                }
-
-            }).catch(function (erro) {
-                console.log(erro);
-            })
-
-            return false;
+          resposta.text().then(texto => {
+            console.error(texto);
+          });
         }
+
+      }).catch(function (erro) {
+        console.log(erro);
+      })
+
+      return false;
     }
+  }
 </script>

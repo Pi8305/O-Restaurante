@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/config.css">
+    <link rel="stylesheet" href="css/posts.css">
     <script src="js/sessao.js"></script>
     <title>Usuario</title>
 </head>
@@ -34,78 +35,88 @@
             </div>
         </div>
     </header>
-    <main>
-        <div id="divUsuario" class="div-usuario">
-            <div class="pfp-info">
-                <div id="divImg" class="div-imagem">
-                    <img src="img/placeholder.png" alt="">
+    <div class="borda-main">
+        <main>
+            <div id="divUsuario" class="div-usuario">
+                <div class="pfp-info">
+                    <div id="divImg" class="div-imagem">
+                        <img src="img/placeholder.png" alt="">
+                    </div>
                 </div>
-            </div>
-            <div class="div-info-usuario">
-                <div id="divNome" class="div-nome">
-                    <span>none</span>
+                <div class="div-info-usuario">
+                    <div id="divNome" class="div-nome">
+                        <span>none</span>
+                    </div>
+                    <div id="divPronomes" class="div-pronomes">
+                        <span>none</span>
+                    </div>
+                    <div id="divIdade" class="div-info-outros">
+                        <span>none</span>
+                    </div>
+                    <div id="divDesc" class="div-info-outros">
+                        <span>none</span>
+                    </div>
                 </div>
-                <div id="divPronomes" class="div-pronomes">
-                    <span>none</span>
-                </div>
-                <div id="divIdade" class="div-info-outros">
-                    <span>none</span>
-                </div>
-                <div id="divDesc" class="div-info-outros">
-                    <span>none</span>
-                </div>
-            </div>
-            <div id="divLinks" class="div-info-links">
+                <div id="divLinks" class="div-info-links">
 
-            </div>
-        </div>
-        <div class="div-arquivo">
-            <input type="file" id="arquivo" class="inp-arquivo">
-            <button onclick="enviar()">Enviar</button>
-        </div>
-        <div class="titulo">
-            <span>Alterar informações</span>
-            <span>Novo post</span>
-        </div>
-        <div class="enviaveis">
-            <div class="div_info">
-                <div class="div-extras">
-                    <span>Alterar bio</span>
-                    <div>
-                        <input type="text" id="inpDesc" placeholder="descrição">
-                        <input type="number" id="inpIdade" placeholder="idade">
-                        <input type="text" id="inpPronomes" placeholder="pronomes">
-                    </div>
-                    <button onclick="salvarExtras()">Salvar</button>
-                </div>
-                <div class="div-links">
-                    <span>Alterar links</span>
-                    <div class="div-inp-links">
-                        <div>
-                            <input type="text" id="div_linktree" placeholder="linktree">
-                            <input type="text" id="div_instagram" placeholder="instagram">
-                            <input type="text" id="div_twitter" placeholder="twitter">
-                            <input type="text" id="div_bluesky" placeholder="bluesky">
-                        </div>
-                        <div>
-                            <input type="text" id="div_youtube" placeholder="youtube">
-                            <input type="text" id="div_discord" placeholder="discord">
-                            <input type="text" id="div_outros1" placeholder="outro link">
-                            <input type="text" id="div_outros2" placeholder="outro link">
-                        </div>
-                    </div>
-                    <button onclick="salvarLinks()">Salvar</button>
                 </div>
             </div>
-            <div class="div-post">
-                <input type="file" id="arquivoPost">
-                <input type="text" id="nomePost">
-                <input type="text" id="descricaoPost">
-                <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button>
-                <div id="tagsss" class="tagsss"></div>
-                <button onclick="enviarPost()">enviar</button>
+            <div class="div-arquivo">
+                <input type="file" id="arquivo" class="inp-arquivo">
+                <button onclick="enviar()">Enviar</button>
             </div>
-        </div>
+            <div class="titulo">
+                <span>Alterar informações</span>
+                <span>Novo post</span>
+            </div>
+            <div class="enviaveis">
+                <div class="div_info">
+                    <div class="div-extras">
+                        <span>Alterar bio</span>
+                        <div>
+                            <input type="text" id="inpDesc" placeholder="descrição">
+                            <input type="number" id="inpIdade" placeholder="idade">
+                            <input type="text" id="inpPronomes" placeholder="pronomes">
+                        </div>
+                        <button onclick="salvarExtras()">Salvar</button>
+                    </div>
+                    <div class="div-links">
+                        <span>Alterar links</span>
+                        <div class="div-inp-links">
+                            <div>
+                                <input type="text" id="div_linktree" placeholder="linktree">
+                                <input type="text" id="div_instagram" placeholder="instagram">
+                                <input type="text" id="div_twitter" placeholder="twitter">
+                                <input type="text" id="div_bluesky" placeholder="bluesky">
+                            </div>
+                            <div>
+                                <input type="text" id="div_youtube" placeholder="youtube">
+                                <input type="text" id="div_discord" placeholder="discord">
+                                <input type="text" id="div_outros1" placeholder="outro link">
+                                <input type="text" id="div_outros2" placeholder="outro link">
+                            </div>
+                        </div>
+                        <button onclick="salvarLinks()">Salvar</button>
+                    </div>
+                </div>
+                <div class="borda">
+                    <div class="div-post">
+                        <input type="file" id="arquivoPost">
+                        <input type="text" id="nomePost">
+                        <input type="text" id="descricaoPost">
+                        <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button>
+                        <div id="tagsss" class="tagsss"></div>
+                        <button onclick="enviarPost()">enviar</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="div-titulo-posts">
+        <span>Posts</span>
+    </div>
+    <div id="postes" class="posts posts-add">
+
+    </div>
     </main>
     <footer>
         <div class="footer">
@@ -154,7 +165,7 @@
     }
 
     let coisos = ['LINK_USUARIO', 'INSTA_USUARIO', 'TWT_USUARIO', 'BSKY_USUARIO', 'YT_USUARIO', 'DISC_USUARIO', 'OUTROS1_USUARIO', 'OUTROS2_USUARIO']
-    
+
     let foi = false
     for (i = 0; i < coisos.length; i++) {
         let coiso = coisos[i]
@@ -163,7 +174,64 @@
                 divLinks.innerHTML += `<span class="titulo mais-espaco">Links:</span><br>`
             }
             foi = true
-            divLinks.innerHTML += `<a href="${sessionStorage[coiso]}">${sessionStorage[coiso]}</a><br>`
+
+            let linkAtual = sessionStorage[coiso]
+
+            if (linkAtual.length > 19) {
+                linkAtual = linkAtual.slice(0, 17)
+                linkAtual += '...'
+            }
+
+            divLinks.innerHTML += `<a href="${sessionStorage[coiso]}">${linkAtual}</a><br>`
+        }
+    }
+
+    renderiza()
+
+    function renderiza() {
+        fetch(`posts/renderizarPorUsuario/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUsuarioServer: sessionStorage.ID_USUARIO
+            })
+        })
+            .then(function (resposta) {
+                return resposta.json()
+            })
+            .then(function (posts) {
+                for (let i = 0; i < posts.length; i++) {
+                    let post = posts[i];
+                    postes.innerHTML += `
+                            <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
+                                <div class="post tira-coiso">
+                                    <div class="img-post tira-coiso">
+                                        <img src="img/posts/${post.imagem}" alt="" onerror="this.src='img/placeholder.png'">
+                                    </div>
+                                    <div class="txt-post tira-coiso">
+                                        <span>${post.nome}</span>
+                                        <span>${post.userr}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            `;
+                }
+            })
+    }
+
+    function avisar(id) {
+        sessionStorage.ID_POST = id
+
+        window.location = "post.html";
+    }
+
+    function pesquisar(evento) {
+        if (evento.key == "Enter") {
+            sessionStorage.PESQUISA_ATUAL = search.value
+            sessionStorage.PESQUISANDO = 'true'
+            window.location = "posts.html"
         }
     }
 

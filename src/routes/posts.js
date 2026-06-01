@@ -36,4 +36,8 @@ router.post("/adicionarTags", function(req, res) {
     postsController.adicionarTags(req, res);
 })
 
+router.post("/renderizarPorUsuario/", function(req, res) {
+    postsController.renderizarPorUsuario(req, res);
+})
+
 module.exports = router;

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/config.css">
+    <link rel="stylesheet" href="css/posts.css">
+    <script src="js/sessao.js"></script>
+    <title>Usuario</title>
+</head>
+
+<body>
+    <header>
+        <div class="border-head">
+            <div class="header">
+                <div class="l-side">
+                    <a href="index-logado.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
+                </div>
+                <div class="mid">
+                    <input type="text" id="search" onkeydown="pesquisar(event)">
+                </div>
+                <div class="r-side-logado">
+                    <div id="nome_usuario">
+                        <a href="config.html" class="usuario-nome">Usuario</a>
+                    </div>
+                    <div id="imagem_usuario">
+                        <a href="config.html"><img src="img/placeholder.png" alt="" class="img_usuario"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="borda-main">
+        <main>
+            <div id="divUsuario" class="div-usuario">
+                <div class="pfp-info">
+                    <div id="divImg" class="div-imagem">
+                        <img src="img/placeholder.png" alt="">
+                    </div>
+                </div>
+                <div class="div-info-usuario">
+                    <div id="divNome" class="div-nome">
+                        <span>none</span>
+                    </div>
+                    <div id="divPronomes" class="div-pronomes">
+                        <span>none</span>
+                    </div>
+                    <div id="divIdade" class="div-info-outros">
+                        <span>none</span>
+                    </div>
+                    <div id="divDesc" class="div-info-outros">
+                        <span>none</span>
+                    </div>
+                </div>
+                <div id="divLinks" class="div-info-links">
+
+                </div>
+            </div>
+    </div>
+    <div class="div-titulo-posts">
+        <span>Posts</span>
+    </div>
+    <div id="postes" class="posts posts-add">
+
+    </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <div>
+
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+
+<script>
+    /* if (!(sessionStorage.EMAIL_USUARIO)) {
+        window.location = "login.html";
+    } else if (sessionStorage.PESQUISANDO == 'false') {
+        window.location = "index-logado.html" 
+    } */
+
+    nome_usuario.innerHTML = `<a href="config.html" class="usuario-nome">${sessionStorage.NOME_USUARIO}</a>`
+
+    imagem_usuario.innerHTML = `<a href="config.html"><img src="img/pfp/${sessionStorage.PFP}" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';" class="img_usuario"></a>`
+
+    let usuario = ``
+
+    fetch('/usuarios/pesquisarUsuario/', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            UsuarioServer: sessionStorage.PESQUISA_ATUAL
+        })
+    }) .then(
+        function(resposta) {
+            return resposta.json()
+        }
+    ) .then(
+        jogaNaVariavel(resposta[0])
+    )
+
+    function jogaNaVariavel(resposta) {
+        usuario = resposta
+    }
+
+    divNome.innerHTML = `<span>${usuario.nome}</span>`
+
+    divImg.innerHTML = `<img src="img/pfp/${usuario.PFP}" alt="" onerror="this.onerror=null; this.src='img/placeholder.png';">`
+
+    if (sessionStorage.PRONOMES_USUARIO == 'nada') {
+        divPronomes.innerHTML = ''
+    } else {
+        divPronomes.innerHTML = `<span>${sessionStorage.PRONOMES_USUARIO}</span>`
+    }
+
+    if (sessionStorage.DESC_USUARIO == 'nada') {
+        divDesc.innerHTML = ''
+    } else {
+        divDesc.innerHTML = `<span>${sessionStorage.DESC_USUARIO}</span>`
+    }
+
+    if (sessionStorage.IDADE_USUARIO == 'nada') {
+        divIdade.innerHTML = ''
+    } else {
+        divIdade.innerHTML = `<span>${sessionStorage.IDADE_USUARIO}</span>`
+    }
+
+    let coisos = ['LINK_USUARIO', 'INSTA_USUARIO', 'TWT_USUARIO', 'BSKY_USUARIO', 'YT_USUARIO', 'DISC_USUARIO', 'OUTROS1_USUARIO', 'OUTROS2_USUARIO']
+
+    let foi = false
+    for (i = 0; i < coisos.length; i++) {
+        let coiso = coisos[i]
+        if (sessionStorage[coiso] != 'nada') {
+            if (foi == false) {
+                divLinks.innerHTML += `<span class="titulo mais-espaco">Links:</span><br>`
+            }
+            foi = true
+
+            let linkAtual = sessionStorage[coiso]
+
+            if (linkAtual.length > 19) {
+                linkAtual = linkAtual.slice(0, 17)
+                linkAtual += '...'
+            }
+
+            divLinks.innerHTML += `<a href="${sessionStorage[coiso]}">${linkAtual}</a><br>`
+        }
+    }
+
+    renderiza()
+
+    function renderiza() {
+        fetch(`posts/renderizarPorUsuario/`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUsuarioServer: sessionStorage.ID_USUARIO
+            })
+        })
+            .then(function (resposta) {
+                return resposta.json()
+            })
+            .then(function (posts) {
+                for (let i = 0; i < posts.length; i++) {
+                    let post = posts[i];
+                    postes.innerHTML += `
+                            <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
+                                <div class="post tira-coiso">
+                                    <div class="img-post tira-coiso">
+                                        <img src="img/posts/${post.imagem}" alt="" onerror="this.src='img/placeholder.png'">
+                                    </div>
+                                    <div class="txt-post tira-coiso">
+                                        <span>${post.nome}</span>
+                                        <span>${post.userr}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            `;
+                }
+            })
+    }
+
+    function avisar(id) {
+        sessionStorage.ID_POST = id
+
+        window.location = "post.html";
+    }
+
+    function pesquisar(evento) {
+        if (evento.key == "Enter") {
+            sessionStorage.PESQUISA_ATUAL = search.value
+            sessionStorage.PESQUISANDO = 'true'
+            window.location = "posts.html"
+        }
+    }
+</script>

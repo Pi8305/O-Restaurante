@@ -92,6 +92,15 @@ function verificarID(tags, res) {
     return database.executar(instrucaoSql);
 }
 
+function renderizarPorUsuario(id, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarPostPorPesq(): ")
+    var instrucaoSql = `
+        select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having usuario.idUsuario = ${id} order by idPost desc;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     renderizar,
     renderizarIndex,
@@ -102,5 +111,6 @@ module.exports = {
     salvarPost,
     adicionarTags,
     verificarID,
-    verificarPostID
+    verificarPostID,
+    renderizarPorUsuario
 };

@@ -123,6 +123,16 @@ function adicionarTags(req, res) {
         })
 }
 
+function renderizarPorUsuario(req, res) {
+    let id = req.body.idUsuarioServer
+    
+    postsModel.renderizarPorUsuario(id, res)
+    .then(function(resposta) {
+        console.log('Achou o post!')
+        res.status(200).json(resposta)
+    })
+}
+
 module.exports = {
     renderizar,
     renderizarIndex,
@@ -131,5 +141,6 @@ module.exports = {
     checkTags,
     salvarTags,
     salvarPost,
-    adicionarTags
+    adicionarTags,
+    renderizarPorUsuario
 }
