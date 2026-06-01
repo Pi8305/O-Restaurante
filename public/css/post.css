@@ -18,16 +18,39 @@
 }
 
 .like {
+    padding: 1.2vw;
+    align-items: center;
+    gap: 1.5vw;
+    cursor: pointer;
+}
+
+.cor-like {
     border: 2px solid #faf9f3;
     background-color: #faf9f3;
+    border-radius: 1vw;
+}
+
+.cor-like-ativo {
+    border: 2px solid #b9b9b3;
+    background-color: #b9b9b3;
+    border-radius: 1vw;
+}
+
+.like * {
+    background-color: transparent;
+}
+
+.like-clicado {
+    border: 2px solid #878783;
+    background-color: #878783;
     border-radius: 1vw;
     padding: 1.2vw;
     align-items: center;
     gap: 1.5vw;
 }
 
-.like * {
-    background-color: #faf9f3;
+.like-clicado {
+    background-color: #878783;
 }
 
 .like span {

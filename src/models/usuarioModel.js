@@ -50,9 +50,19 @@ function links(mandar, id) {
     return database.executar(instrucaoSql);
 }
 
+function pesquisarUsuario(usuario, res) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarUsuario()")
+    var instrucaoSql = `
+        SELECT idUsuario, nome, email, senha, dtCriacao, ifnull(descricao, 'nada') descricao, ifnull(idade, 0) idade, ifnull(pronomes, 'nada') pronomes, imagem_perfil pfp, ifnull(links.linktree, 'nada') linktree, ifnull(links.instagram, 'nada') instagram, ifnull(links.twitter, 'nada') twitter, ifnull(links.bluesky, 'nada') bluesky, ifnull(links.youtube, 'nada') youtube, ifnull(links.discord, 'nada') discord, ifnull(links.outros1, 'nada') outros1, ifnull(links.outros2, 'nada') outros2 FROM usuario JOIN links ON usuario.fkLinks = links.idLinks WHERE usuario.idUsuario = ${usuario}
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     extras,
-    links
+    links,
+    pesquisarUsuario
 };

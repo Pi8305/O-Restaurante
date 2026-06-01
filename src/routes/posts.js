@@ -12,7 +12,7 @@ router.get("/renderizarIndex", function (req, res) {
     postsController.renderizarIndex(req, res);
 })
 
-router.get("/buscarPost/:idPost", function (req, res) {
+router.post("/buscarPost", function (req, res) {
     postsController.buscarPost(req, res);
 })
 
@@ -38,6 +38,18 @@ router.post("/adicionarTags", function(req, res) {
 
 router.post("/renderizarPorUsuario/", function(req, res) {
     postsController.renderizarPorUsuario(req, res);
+})
+
+router.post("/verLikes", function(req, res) {
+    postsController.verLikes(req, res);
+})
+
+router.post("/darLike", function(req, res) {
+    postsController.darLike(req, res);
+})
+
+router.post("/tirarLike", function(req, res) {
+    postsController.tirarLike(req, res);
 })
 
 module.exports = router;

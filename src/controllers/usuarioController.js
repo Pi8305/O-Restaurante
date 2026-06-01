@@ -111,9 +111,21 @@ function links(req, res) {
     })
 }
 
+function pesquisarUsuario(req, res) {
+    let usuario = req.body.UsuarioServer
+
+    usuarioModel.pesquisarUsuario(usuario, res)
+    .then(
+        function(resposta) {
+            res.status(200).json(resposta)
+        }
+    )
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     extras,
-    links
+    links,
+    pesquisarUsuario
 }

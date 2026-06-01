@@ -20,4 +20,8 @@ router.post("/links", function(req, res) {
     usuarioController.links(req, res)
 })
 
+router.post('/pesquisarUsuario', function(req, res) {
+    usuarioController.pesquisarUsuario(req, res)
+})
+
 module.exports = router;

@@ -34,8 +34,15 @@ create table post (
     nome varchar(45) not null,
     descricao varchar(200),
     imagem varchar(255),
-    likes int,
     dtPost datetime default current_timestamp not null
+);
+
+create table likes (
+	fkPost int,
+    fkUsuario int,
+    primary key (fkPost, fkUsuario),
+    foreign key (fkPost) references post(idPost),
+    foreign key (fkUsuario) references usuario(idUsuario)
 );
 
 create table tags (
@@ -46,7 +53,9 @@ create table tags (
 create table conexao (
 	fkPost int,
     fkTags int,
-    constraint PKComposta2 primary key (fkPost, fkTags)
+    constraint PKComposta2 primary key (fkPost, fkTags),
+    foreign key (fkPost) references post(idPost),
+    foreign key (fkTags) references tags(idTag)
 );
 
 insert into links (idLinks) values
@@ -77,19 +86,32 @@ insert into usuario (nome, email, senha, dtCriacao, fkLinks) values
 ('kkkk', 'gggg@ffff', 'bbbb', '26-02-01 22:55:09', 11),
 ('llll', 'iiii@ffff', 'bbbb', '26-01-01 22:55:09', 12);
 
-insert into post (fkUsuario, nome, descricao, imagem, likes, dtPost) values
-(1, 'Primeiro post', 'Descrição daora', '1.png', 2, '26-01-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '2.png', 2, '26-02-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '3.png', 2, '26-03-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '4.png', 2, '26-04-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '', 2, '26-05-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '', 2, '26-06-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '', 2, '26-07-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '', 2, '26-08-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '', 2, '26-09-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '', 2, '26-10-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '', 2, '26-11-25 22:00'),
-(1, 'Primeiro post', 'Descrição daora', '', 2, '26-12-25 22:00');
+insert into post (fkUsuario, nome, descricao, imagem, dtPost) values
+(1, 'Primeiro post', 'Descrição daora', '1.png', '26-01-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '2.png', '26-02-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '3.png', '26-03-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '4.png', '26-04-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', '26-05-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', '26-06-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', '26-07-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', '26-08-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', '26-09-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', '26-10-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', '26-11-25 22:00'),
+(1, 'Primeiro post', 'Descrição daora', '', '26-12-25 22:00');
+
+insert into likes values
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(2, 2),
+(2, 4),
+(5, 1),
+(5, 6),
+(2, 1),
+(2, 8),
+(2, 9);
 
 insert into tags (tag) values
 ('legal'),
@@ -147,6 +169,7 @@ select * from tags;
 select * from post;
 select * from usuario;
 select * from links;
+select * from likes;
 
 select idPost from postsView order by idPost desc limit 1;
 
@@ -164,4 +187,12 @@ select month(post.dtPost) mes, count(post.idPost) postMes from post group by mes
 select * from post order by likes desc limit 1;
 select tags.tag, sum(post.likes) likesTag from post left join conexao on conexao.fkPost = post.idPost left join tags on conexao.fkTags = tags.idTag group by tags.tag order by likesTag desc limit 1;
 
-SELECT idUsuario, nome, email, senha, dtCriacao, ifnull(descricao, 'nada') descricao, ifnull(idade, 0) idade, ifnull(pronomes, 'nada') pronomes, imagem_perfil pfp, ifnull(links.linktree, 'nada') linktree, ifnull(links.instagram, 'nada') instagram, ifnull(links.twitter, 'nada') twitter, ifnull(links.bluesky, 'nada') bluesky, ifnull(links.youtube, 'nada') youtube, ifnull(links.discord, 'nada') discord, ifnull(links.outros1, 'nada') outros1, ifnull(links.outros2, 'nada') outros2 FROM usuario JOIN links ON usuario.fkLinks = links.idLinks WHERE usuario.email = '${email}' AND usuario.senha = '${senha}'
+select count(*) likes from likes where fkPost = 2;
+
+select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario left join likes on post.idPost = likes.fkPost group by post.idPost order by idPost desc limit 20;
+
+select usuario.nome userr, usuario.idUsuario idUsuario, post.idPost, post.nome, post.descricao, (select count(fkPost) likes from likes where fkPost = 1) likes, post.imagem, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = 1;
+
+select count(ls.fkUsuario) likes, post.* from likes ls join post on ls.fkPost = post.idPost group by ls.fkPost order by likes desc limit 1;
+
+select tags.tag, count(likes.fkUsuario) likesTag from post left join conexao on conexao.fkPost = post.idPost left join tags on conexao.fkTags = tags.idTag left join likes on likes.fkPost = post.idPost group by tags.tag order by likesTag desc limit 1;

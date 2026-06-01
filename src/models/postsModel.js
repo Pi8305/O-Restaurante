@@ -21,7 +21,7 @@ function renderizarIndex(req, res) {
 function buscarPost(idPost, res) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarPost(): ")
     var instrucaoSql = `
-        select usuario.nome userr, usuario.idUsuario idUsuario, post.idPost, post.nome, post.descricao, post.likes, post.imagem, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = ${idPost};
+    select usuario.nome userr, usuario.idUsuario idUsuario, post.idPost, post.nome, post.descricao, (select count(fkPost) likes from likes where fkPost = ${idPost}) likes, post.imagem, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost having post.idPost = ${idPost};    
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -101,6 +101,34 @@ function renderizarPorUsuario(id, res) {
     return database.executar(instrucaoSql);
 }
 
+function verLikes(idUsuario, idPost, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function verLikes(): ")
+    var instrucaoSql = `
+        select * from likes where fkPost = ${idPost} and fkUsuario = ${idUsuario};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function darLike(idUsuario, idPost, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function darLike(): ")
+    var instrucaoSql = `
+        insert into likes values
+        (${idPost}, ${idUsuario});
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function tirarLike(idUsuario, idPost, res) {
+    console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function tirarLike(): ")
+    var instrucaoSql = `
+        delete from likes where fkUsuario = ${idUsuario} and fkPost = ${idPost}
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     renderizar,
     renderizarIndex,
@@ -112,5 +140,8 @@ module.exports = {
     adicionarTags,
     verificarID,
     verificarPostID,
-    renderizarPorUsuario
+    renderizarPorUsuario,
+    verLikes,
+    darLike,
+    tirarLike
 };

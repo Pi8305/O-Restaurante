@@ -130,9 +130,9 @@
 </html>
 
 <script>
-    /* if (!(sessionStorage.EMAIL_USUARIO)) {
+    if (!(sessionStorage.EMAIL_USUARIO)) {
         window.location = "login.html";
-    } */
+    }
 
     sessionStorage.PESQUISANDO = false
 
@@ -460,4 +460,12 @@
             limparSessao()
         })
     }
+
+    function pesquisar(evento) {
+            if (evento.key == "Enter") {
+                sessionStorage.PESQUISA_ATUAL = search.value
+                sessionStorage.PESQUISANDO = 'true'
+                window.location = "posts.html"
+            }
+        }
 </script>

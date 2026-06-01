@@ -30,7 +30,7 @@ function graficoUsuarios(resposta) {
 function graficosLikesPost(resposta) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function graficosLikesPost(): ")
     var instrucaoSql = `
-        select * from post order by likes desc limit 1;    
+        select count(ls.fkUsuario) likes, post.* from likes ls join post on ls.fkPost = post.idPost group by ls.fkPost order by likes desc limit 1;    
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -39,8 +39,8 @@ function graficosLikesPost(resposta) {
 function graficosLikesTag(resposta) {
     console.log("ACESSEI O POSTS MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function graficosLikesTag(): ")
     var instrucaoSql = `
-        select tags.tag, sum(post.likes) likesTag from post left join conexao on conexao.fkPost = post.idPost left join tags on conexao.fkTags = tags.idTag group by tags.tag order by likesTag desc limit 1;   
-    `;
+        select tags.tag, count(likes.fkUsuario) likesTag from post left join conexao on conexao.fkPost = post.idPost left join tags on conexao.fkTags = tags.idTag left join likes on likes.fkPost = post.idPost group by tags.tag order by likesTag desc limit 1;
+        `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }

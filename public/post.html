@@ -71,7 +71,7 @@
                     <span class="tag-link" onclick="tagLink(TAG)">TAG</span>
                     <span class="tag-link" onclick="tagLink(TAG)">TAG</span>
                 </div>
-                <div class="like">
+                <div id="likeCor" class="like" onclick="like()">
                     <span id="likes">Likes: x</span>
 
                     <div id="likeImg"><img src="img/placeholder.png" alt=""></div>
@@ -101,7 +101,17 @@
 
         let idDoPost = sessionStorage.ID_POST
 
-        fetch(`posts/buscarPost/${idDoPost}`)
+        let deuLike = false
+
+        fetch(`posts/buscarPost`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idPostServer: idDoPost
+            })
+        })
             .then(function (res) {
                 return res.json();
             })
@@ -110,7 +120,7 @@
                 postNome.innerHTML = post.nome;
                 postDesc.innerHTML = post.descricao
                 likes.innerHTML = `Likes: ${post.likes}`
-                spanAutor.innerHTML = `<span onclick="autor()">@${post.userr}</span>`
+                spanAutor.innerHTML = `<span onclick="autor('${post.idUsuario}')">@${post.userr}</span>`
 
                 let tag = post.tags.split(",");
 
@@ -122,7 +132,68 @@
                         tags.innerHTML += `<span class="tag-link" onclick="tagLink('${tag[i]}')">#${tag[i]}</span> `
                     }
                 }
-            });
+            }).then(
+                function () {
+                    return fetch(`posts/verLikes`, {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            idPostServer: idDoPost,
+                            idUsuarioServer: sessionStorage.ID_USUARIO
+                        })
+                    }).then(
+                        function (resposta) {
+                            return resposta.json()
+                        }
+                    ).then(
+                        function (resposta) {
+                            if (!(resposta.length == 0)) {
+                                deuLike = true
+
+                                likeCor.classList.add("cor-like-ativo")
+                            } else {
+                                likeCor.classList.add("cor-like")
+                            }
+                        }
+                    )
+                }
+            )
+
+        function like() {
+            if (deuLike) {
+                fetch("posts/tirarLike", {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        idUsuarioServer: sessionStorage.ID_USUARIO,
+                        idPostServer: idDoPost
+                    })
+                }) .then(
+                    function(resposta) {
+                        window.location.reload()
+                    }
+                )
+            } else {
+                fetch("posts/darLike", {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        idUsuarioServer: sessionStorage.ID_USUARIO,
+                        idPostServer: idDoPost
+                    })
+                }) .then(
+                    function(resposta) {
+                        window.location.reload()
+                    }
+                )
+            }
+        }
 
         function tagLink(tag) {
             console.log(tag)
@@ -138,6 +209,14 @@
                 sessionStorage.PESQUISANDO = 'true'
                 window.location = "posts.html"
             }
+        }
+
+        function autor(usuario) {
+            console.log(usuario)
+            sessionStorage.PESQUISA_ATUAL = usuario
+            sessionStorage.PESQUISANDO = 'true'
+
+            window.location = 'usuario.html'
         }
     }
 </script>

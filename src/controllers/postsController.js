@@ -31,7 +31,7 @@ function renderizarIndex(req, res) {
 }
 
 function buscarPost(req, res) {
-    let idPost = req.params.idPost
+    let idPost = req.body.idPostServer
     postsModel.buscarPost(idPost)
         .then(
             function (resultado) {
@@ -133,6 +133,41 @@ function renderizarPorUsuario(req, res) {
     })
 }
 
+function verLikes(req, res) {
+    console.log('chegou no controller')
+    let idUsuario = req.body.idUsuarioServer
+    let idPost = req.body.idPostServer
+
+    postsModel.verLikes(idUsuario, idPost, res)
+    .then(function(resposta) {
+        res.status(200).json(resposta)
+    })
+}
+
+function darLike(req, res) {
+    let idUsuario = req.body.idUsuarioServer
+    let idPost = req.body.idPostServer
+
+    postsModel.darLike(idUsuario, idPost, res)
+    .then(
+        function(resposta) {
+            res.status(200).json(resposta)
+        }
+    )
+}
+
+function tirarLike(req, res) {
+    let idUsuario = req.body.idUsuarioServer
+    let idPost = req.body.idPostServer
+
+    postsModel.tirarLike(idUsuario, idPost, res)
+    .then(
+        function(resposta) {
+            res.status(200).json(resposta)
+        }
+    )
+}
+
 module.exports = {
     renderizar,
     renderizarIndex,
@@ -142,5 +177,8 @@ module.exports = {
     salvarTags,
     salvarPost,
     adicionarTags,
-    renderizarPorUsuario
+    renderizarPorUsuario,
+    verLikes,
+    darLike,
+    tirarLike
 }
