@@ -37,6 +37,9 @@
     </header>
     <div class="borda-main">
         <main>
+            <div id="botaoDash" onclick="dashboard()" class="botao-dash">
+
+            </div>
             <div id="divUsuario" class="div-usuario">
                 <div class="pfp-info">
                     <div id="divImg" class="div-imagem">
@@ -123,7 +126,7 @@
             <div>
 
             </div>
-        </div>
+        </div>  
     </footer>
 </body>
 
@@ -132,6 +135,16 @@
 <script>
     if (!(sessionStorage.EMAIL_USUARIO)) {
         window.location = "login.html";
+    }
+
+    if (sessionStorage.ID_USUARIO == 1) {
+        botaoDash.innerHTML = '<a href="dashboard.html"><span>Dashboard</span><a>'
+    }
+
+    function dashboard() {
+        if (sessionStorage.ID_USUARIO == 1) {
+            window.location == "dashboard.html"
+        }
     }
 
     sessionStorage.PESQUISANDO = false

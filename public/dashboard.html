@@ -15,6 +15,9 @@
 </head>
 
 <body>
+    <div class="botao">
+        <span onclick="voltar()">Voltar</span>
+    </div>
     <div class="tudo">
         <div class="caixa">
             <div class="barras">
@@ -44,7 +47,7 @@
     let graf2 = document.getElementById('linhas');
     let temp = ''
 
-    /* if (sessionStorage.ID_USUARIO == 1) { */
+    if (sessionStorage.ID_USUARIO == 1) {
 
     function mandarPost(idPost) {
         sessionStorage.ID_POST = idPost
@@ -159,11 +162,15 @@
     }
 
     plotarInicial()
-    /* } else {
+
+    function voltar() {
+        window.location = "index-logado.html"
+    }
+    } else {
         window.location = "login.html"
     }
 
- */
+
 
 
 </script>

@@ -2,11 +2,27 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 11vw;
+    gap: 5vw;
+}
+
+.botao {
+    border: 2px solid #e0ce98;
+    background-color: #e0ce98;
+    cursor: pointer;
+    display: flex;
+    margin: 1vw;
+    width: fit-content;
+    position: absolute;
+}
+
+.botao span {
+    background-color: #e0ce98;
+    font-size: 3vw;
+    margin: 0.5vw;
 }
 
 .caixa {
-    padding-top: 5vw;
+    padding-top: 11vw;
     display: flex;
     align-items: center;
     gap: 5vw;

@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    background-color: #fdfcf5;
+}
+
 .borda-main {
     border: 2px solid #f7f5ed;
     background-color: #f7f5ed;
@@ -8,6 +13,23 @@
 
 .borda-main * {
     background-color: #f7f5ed;
+}
+
+.botao-dash {
+    display: flex;
+    position: absolute;
+    border: 2px solid #fdfcf5;
+    background-color: #fdfcf5;
+    width: fit-content;
+    transform: translateX(77vw);
+    cursor: pointer;
+}
+
+.botao-dash span {
+    background-color: #fdfcf5;
+    margin: 0.5vw;
+    font-size: 3vw;
+    color: black;
 }
 
 .div-usuario {
