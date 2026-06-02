@@ -168,6 +168,17 @@ function tirarLike(req, res) {
     )
 }
 
+function carregarMais(req, res) {
+    let carregados = req.body.carregadosServer
+
+    postsModel.carregarMais(carregados, res)
+    .then(
+        function(resposta) {
+            res.status(200).json(resposta)
+        }
+    )
+}
+
 module.exports = {
     renderizar,
     renderizarIndex,
@@ -180,5 +191,6 @@ module.exports = {
     renderizarPorUsuario,
     verLikes,
     darLike,
-    tirarLike
+    tirarLike,
+    carregarMais
 }

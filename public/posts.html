@@ -58,6 +58,8 @@
     if (!(sessionStorage.EMAIL_USUARIO)) {
         window.location = "login.html";
     } else {
+        let carregados = 0
+        let maximo = false
 
         console.log(`comecei o script`)
 
@@ -89,8 +91,14 @@
                         </a>
                         `;
                     }
+
+                    carregados += posts.length
+
+                    if (posts.length < 18) {
+                        maximo = true
+                    }
                 });
-        } else if (sessionStorage.PESQUISANDO == 'true'){
+        } else if (sessionStorage.PESQUISANDO == 'true') {
             console.log(`entrei no caso de tem`)
             let pesq = sessionStorage.PESQUISA_ATUAL
 
@@ -116,9 +124,15 @@
                         `;
                     }
                 })
-            
+
             delete sessionStorage.PESQUISA_ATUAL
             sessionStorage.PESQUISANDO = 'false'
+
+            carregados += posts.length
+
+            if (posts.length < 18) {
+                maximo = true
+            }
         }
 
         function avisar(id) {
@@ -135,10 +149,48 @@
             }
         }
 
-        /* let carregados = 20
-        function carregarMais() {
-            fetch()
-        } */
 
+        function carregarMais() {
+            if (maximo == false) {
+                fetch("posts/carregarMais", {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        carregadosServer: carregados
+                    })
+                }).then(
+                    function (resposta) {
+                        return resposta.json()
+                    }
+                ).then(
+                    function (posts) {
+                        for (let i = 0; i < posts.length; i++) {
+                            let post = posts[i];
+                            postes.innerHTML += `
+                            <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
+                                <div class="post tira-coiso">
+                                    <div class="img-post tira-coiso">
+                                        <img src="img/posts/${post.imagem}" alt="" onerror="this.src='img/placeholder.png'">
+                                    </div>
+                                    <div class="txt-post tira-coiso">
+                                        <span>${post.nome}</span>
+                                        <span>${post.userr}</span>
+                                    </div>
+                                </div>
+                            </a>
+                            `;
+                        }
+
+                        carregados += posts.length
+
+                        if (posts.length < 18) {
+                            maximo = true
+                        }
+                    }
+                )
+            }
+        }
     }
 </script>

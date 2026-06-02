@@ -196,3 +196,5 @@ select usuario.nome userr, usuario.idUsuario idUsuario, post.idPost, post.nome, 
 select count(ls.fkUsuario) likes, post.* from likes ls join post on ls.fkPost = post.idPost group by ls.fkPost order by likes desc limit 1;
 
 select tags.tag, count(likes.fkUsuario) likesTag from post left join conexao on conexao.fkPost = post.idPost left join tags on conexao.fkTags = tags.idTag left join likes on likes.fkPost = post.idPost group by tags.tag order by likesTag desc limit 1;
+
+select usuario.nome userr, usuario.idUsuario idUsuario, post.*, GROUP_CONCAT(tags.tag) tags from post join conexao on post.idPost = conexao.fkPost join tags on conexao.fkTags = tags.idTag join usuario on usuario.idUsuario = post.fkUsuario group by post.idPost order by idPost desc limit 18;

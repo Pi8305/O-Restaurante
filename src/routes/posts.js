@@ -52,4 +52,8 @@ router.post("/tirarLike", function(req, res) {
     postsController.tirarLike(req, res);
 })
 
+router.post("/carregarMais", function(req, res) {
+    postsController.carregarMais(req, res);
+})
+
 module.exports = router;
