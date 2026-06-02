@@ -25,6 +25,7 @@
     background-color: #f0e7c3;
     width: 30vw;
     height: auto;
+    transform: translateX(4vw);
 }
 
 .texto-ap span {

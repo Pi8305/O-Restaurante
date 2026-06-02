@@ -143,9 +143,10 @@ insert into conexao values
 
 select * from usuario join links on usuario.fkLinks = links.idLinks; 
 
+drop table conexao;
+drop table likes;
 drop table post;
 drop table tags;
-drop table conexao;
 drop table usuario;
 drop table links;
 

@@ -28,7 +28,7 @@ a {
 .botao-dash span {
     background-color: #fdfcf5;
     padding: 0.5vw;
-    font-size: 3vw;
+    font-size: 2vw;
     color: black;
 }
 
@@ -38,14 +38,14 @@ a {
     border: 2px solid #fdfcf5;
     background-color: #fdfcf5;
     width: fit-content;
-    transform: translate3d(73vw, 0, 0);
+    transform: translate3d(80vw, 0, 0);
     cursor: pointer;
 }
 
 .botao-sessao span {
     background-color: #fdfcf5;
     padding: 0.5vw;
-    font-size: 3vw;
+    font-size: 2vw;
     color: black;
 }
 
@@ -84,6 +84,10 @@ a {
     align-items: center;
     flex-direction: column;
     gap: 0.2vw;
+    position: absolute;
+    width: 35vw;
+    height: fit-content;
+    transform: translateX(40vw);
 }
 
 .div-nome {
@@ -103,6 +107,7 @@ a {
     display: block;
     font-size: 1.5vw;
     margin-right: 4vw;
+    transform: translateX(42vw);
 }
 
 .mais-espaco {

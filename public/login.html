@@ -21,14 +21,15 @@
           <input type="text" id="search">
         </div>
         <div class="r-side">
-          <div class="login-button">
-            <a href="login.html">Login</a>
+          <div class="login-button apagar">
+            <span>Login</span>
           </div>
-          <div class="register-button apagar">
-            <span>Registrar</span>
+          <div class="register-button">
+            <a href="cadastro.html">Registrar</a>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </header>
 
@@ -104,7 +105,7 @@
           console.log(resposta);
 
           if (resposta == []) {
-            
+
           } else {
 
             resposta.json().then(json => {
