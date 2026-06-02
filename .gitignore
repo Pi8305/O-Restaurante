@@ -3,4 +3,5 @@ node_modules
 package-lock.json
 
 .github
-*.png
+public/img/pfp
+public/img/posts
