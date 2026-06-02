@@ -91,7 +91,7 @@ function extras(req, res) {
     let mandar = req.body.extrasServer
     let id = req.body.idUsuarioServer
 
-    mandar = mandar.split(',')
+    mandar = mandar.split('OITO3ZERO5')
 
     usuarioModel.extras(mandar, id)
     .then(function(resultado) {

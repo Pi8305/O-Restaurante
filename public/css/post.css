@@ -75,7 +75,10 @@
 }
 
 .desc {
-    width: 37vw;    
+    width: 37vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .desc span {

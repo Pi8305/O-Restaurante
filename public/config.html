@@ -174,7 +174,7 @@
         divDesc.innerHTML = `<span>${sessionStorage.DESC_USUARIO}</span>`
     }
 
-    if (sessionStorage.IDADE_USUARIO == 'nada') {
+    if (sessionStorage.IDADE_USUARIO == '0') {
         divIdade.innerHTML = ''
     } else {
         divIdade.innerHTML = `<span>${sessionStorage.IDADE_USUARIO}</span>`
@@ -227,7 +227,7 @@
                                         <img src="img/posts/${post.imagem}" alt="" onerror="this.src='img/placeholder.png'">
                                     </div>
                                     <div class="txt-post tira-coiso">
-                                        <span>${post.nome}</span>
+                                        <span>${post.nome}</span> | 
                                         <span>${post.userr}</span>
                                     </div>
                                 </div>
@@ -378,23 +378,24 @@
         let idade = inpIdade.value
         let pronomes = inpPronomes.value
 
-        if (desc == '' && sessionStorage.DESC_USUARIO == 'nada') {
+        if (desc == '' && (sessionStorage.DESC_USUARIO == 'nada' || sessionStorage.DESC_USUARIO == '')) {
             desc = "nada"
-        } else if (desc == '' && sessionStorage.DESC_USUARIO != 'nada') {
+        } else if (desc == '' && (sessionStorage.DESC_USUARIO != 'nada' || sessionStorage.DESC_USUARIO != '')) {
             desc = sessionStorage.DESC_USUARIO
         }
-        if (idade == '' && sessionStorage.IDADE_USUARIO == 0) {
+        if (idade == '' && (sessionStorage.IDADE_USUARIO == 0 || sessionStorage.IDADE_USUARIO == '')) {
             idade = 0
-        } else if (idade == '' && sessionStorage.IDADE_USUARIO != 0) {
+        } else if (idade == '' && (sessionStorage.IDADE_USUARIO != 0 || sessionStorage.IDADE_USUARIO != '')) {
             idade = sessionStorage.IDADE_USUARIO
         }
-        if (pronomes == '' && sessionStorage.PRONOMES_USUARIO == 'nada') {
+        if (pronomes == '' && (sessionStorage.PRONOMES_USUARIO == 'nada' || sessionStorage.PRONOMES_USUARIO == '')) {
             pronomes = 'nada'
-        } else if (pronomes == '' && sessionStorage.PRONOMES_USUARIO != 'nada') {
+        } else if (pronomes == '' && (sessionStorage.PRONOMES_USUARIO != 'nada' || sessionStorage.PRONOMES_USUARIO != '')) {
             pronomes = sessionStorage.PRONOMES_USUARIO
         }
 
-        let mandar = `${desc},${idade},${pronomes}`
+        let mandar = `${desc}OITO3ZERO5${idade}OITO3ZERO5${pronomes}`
+        console.log(mandar)
 
         fetch("usuarios/extras", {
             method: "POST",
@@ -420,44 +421,44 @@
         let outros1 = div_outros1.value
         let outros2 = div_outros2.value
 
-        if (linktree == '' && sessionStorage.LINK_USUARIO == 'nada') {
+        if (linktree == '' && (sessionStorage.LINK_USUARIO == 'nada' || sessionStorage.LINK_USUARIO == '')) {
             linktree = 'nada'
-        } else if (linktree == '' && sessionStorage.LINK_USUARIO != 'nada') {
+        } else if (linktree == '' && (sessionStorage.LINK_USUARIO != 'nada' || sessionStorage.LINK_USUARIO != '')) {
             linktree = sessionStorage.LINK_USUARIO
         }
-        if (instagram == '' && sessionStorage.INSTA_USUARIO == 'nada') {
+        if (instagram == '' && (sessionStorage.INSTA_USUARIO == 'nada' || sessionStorage.INSTA_USUARIO == '')) {
             instagram = 'nada'
-        } else if (instagram == '' && sessionStorage.INSTA_USUARIO != 'nada') {
+        } else if (instagram == '' && (sessionStorage.INSTA_USUARIO != 'nada' || sessionStorage.INSTA_USUARIO != '')) {
             instagram = sessionStorage.INSTA_USUARIO
         }
-        if (twitter == '' && sessionStorage.TWT_USUARIO == 'nada') {
+        if (twitter == '' && (sessionStorage.TWT_USUARIO == 'nada' || sessionStorage.TWT_USUARIO == '')) {
             twitter = 'nada'
-        } else if (twitter == '' && sessionStorage.TWT_USUARIO != 'nada') {
+        } else if (twitter == '' && (sessionStorage.TWT_USUARIO != 'nada' || sessionStorage.TWT_USUARIO != '')) {
             twitter = sessionStorage.TWT_USUARIO
         }
-        if (bluesky == '' && sessionStorage.BSKY_USUARIO == 'nada') {
+        if (bluesky == '' && (sessionStorage.BSKY_USUARIO == 'nada' || sessionStorage.BSKY_USUARIO == '')) {
             bluesky = 'nada'
-        } else if (bluesky == '' && sessionStorage.BSKY_USUARIO != 'nada') {
+        } else if (bluesky == '' && (sessionStorage.BSKY_USUARIO != 'nada' || sessionStorage.BSKY_USUARIO != '')) {
             bluesky = sessionStorage.BSKY_USUARIO
         }
-        if (youtube == '' && sessionStorage.YT_USUARIO == 'nada') {
+        if (youtube == '' && (sessionStorage.YT_USUARIO == 'nada' || sessionStorage.YT_USUARIO == '')) {
             youtube = 'nada'
-        } else if (youtube == '' && sessionStorage.YT_USUARIO != 'nada') {
+        } else if (youtube == '' && (sessionStorage.YT_USUARIO != 'nada' || sessionStorage.YT_USUARIO != '')) {
             youtube = sessionStorage.YT_USUARIO
         }
-        if (discord == '' && sessionStorage.DISC_USUARIO == 'nada') {
+        if (discord == '' && (sessionStorage.DISC_USUARIO == 'nada' || sessionStorage.DISC_USUARIO == '')) {
             discord = 'nada'
-        } else if (discord == '' && sessionStorage.DISC_USUARIO != 'nada') {
+        } else if (discord == '' && (sessionStorage.DISC_USUARIO != 'nada' || sessionStorage.DISC_USUARIO != '')) {
             discord = sessionStorage.DISC_USUARIO
         }
-        if (outros1 == '' && sessionStorage.OUTROS1_USUARIO == 'nada') {
+        if (outros1 == '' && (sessionStorage.OUTROS1_USUARIO == 'nada' || sessionStorage.OUTROS1_USUARIO == '')) {
             outros1 = 'nada'
-        } else if (outros1 == '' && sessionStorage.OUTROS1_USUARIO != 'nada') {
+        } else if (outros1 == '' && (sessionStorage.OUTROS1_USUARIO != 'nada' || sessionStorage.OUTROS1_USUARIO != '')) {
             outros1 = sessionStorage.OUTROS1_USUARIO
         }
-        if (outros2 == '' && sessionStorage.OUTROS2_USUARIO == 'nada') {
+        if (outros2 == '' && (sessionStorage.OUTROS2_USUARIO == 'nada' || sessionStorage.OUTROS2_USUARIO == '')) {
             outros2 = 'nada'
-        } else if (outros2 == '' && sessionStorage.OUTROS2_USUARIO != 'nada') {
+        } else if (outros2 == '' && (sessionStorage.OUTROS2_USUARIO != 'nada' || sessionStorage.OUTROS2_USUARIO != '')) {
             outros2 = sessionStorage.OUTROS2_USUARIO
         }
 
