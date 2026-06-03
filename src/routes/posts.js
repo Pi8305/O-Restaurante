@@ -16,7 +16,7 @@ router.post("/buscarPost", function (req, res) {
     postsController.buscarPost(req, res);
 })
 
-router.get("/renderizarPorPesquisa/:tag", function (req, res) {
+router.post("/renderizarPorPesquisa", function (req, res) {
     postsController.buscarPostPorPesq(req, res);
 })
 
@@ -36,7 +36,7 @@ router.post("/adicionarTags", function(req, res) {
     postsController.adicionarTags(req, res);
 })
 
-router.post("/renderizarPorUsuario/", function(req, res) {
+router.post("/renderizarPorUsuario", function(req, res) {
     postsController.renderizarPorUsuario(req, res);
 })
 

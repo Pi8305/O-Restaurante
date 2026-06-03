@@ -47,11 +47,11 @@ function buscarPost(req, res) {
 }
 
 function buscarPostPorPesq(req, res) {
-    let tag = req.params.tag
+    let tag = req.body.tagServer
     postsModel.buscarPostPorPesq(tag)
         .then(
             function (resultado) {
-                res.json(resultado);
+                res.status(200).json(resultado);
             }
         ).catch(
             function (erro) {

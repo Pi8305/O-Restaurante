@@ -46,7 +46,7 @@
     <footer>
         <div class="footer">
             <div>
-                
+
             </div>
         </div>
     </footer>
@@ -55,12 +55,15 @@
 </html>
 
 <script>
+    let carregados = 0
+    let maximo = false
+
     function avisar(id) {
         sessionStorage.ID_POST = id
-    
+
         window.location = "post.html";
     }
-    
+
     function pesquisar(evento) {
         if (evento.key == "Enter") {
             sessionStorage.PESQUISA_ATUAL = search.value
@@ -72,8 +75,6 @@
     if (!(sessionStorage.EMAIL_USUARIO)) {
         window.location = "login.html";
     } else {
-        let carregados = 0
-        let maximo = false
 
         console.log(`comecei o script`)
 
@@ -89,6 +90,8 @@
                     return resposta.json();
                 })
                 .then(function (posts) {
+                    console.log('posts')
+
                     for (let i = 0; i < posts.length; i++) {
                         let post = posts[i];
                         postes.innerHTML += `
@@ -116,11 +119,21 @@
             console.log(`entrei no caso de tem`)
             let pesq = sessionStorage.PESQUISA_ATUAL
 
-            fetch(`posts/renderizarPorPesquisa/${pesq}`)
+            fetch(`posts/renderizarPorPesquisa`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    tagServer: pesq
+                })
+            })
                 .then(function (resposta) {
                     return resposta.json()
                 })
                 .then(function (posts) {
+                    console.log(posts)
+
                     for (let i = 0; i < posts.length; i++) {
                         let post = posts[i];
                         postes.innerHTML += `
@@ -137,16 +150,19 @@
                         </div>
                         `;
                     }
+
+                    carregados += posts.length
+
+                    if (posts.length < 18) {
+                        maximo = true
+                    }
+                    
+                    delete sessionStorage.PESQUISA_ATUAL
+                    sessionStorage.PESQUISANDO = 'false'
+
                 })
 
-            delete sessionStorage.PESQUISA_ATUAL
-            sessionStorage.PESQUISANDO = 'false'
 
-            carregados += posts.length
-
-            if (posts.length < 18) {
-                maximo = true
-            }
         }
 
         function carregarMais() {

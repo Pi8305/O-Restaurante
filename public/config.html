@@ -129,7 +129,7 @@
             <div>
 
             </div>
-        </div>  
+        </div>
     </footer>
 </body>
 
@@ -221,17 +221,17 @@
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i];
                     postes.innerHTML += `
-                            <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
-                                <div class="post tira-coiso">
-                                    <div class="img-post tira-coiso">
-                                        <img src="img/posts/${post.imagem}" alt="" onerror="this.src='img/placeholder.png'">
-                                    </div>
-                                    <div class="txt-post tira-coiso">
-                                        <span>${post.nome}</span> | 
-                                        <span>${post.userr}</span>
-                                    </div>
+                            <div onclick="avisar(${post.idPost})" class="post-click tira-coiso">
+                            <div class="post tira-coiso">
+                                <div class="img-post tira-coiso">
+                                    <img src="img/posts/${post.imagem}" alt="" onerror="this.src='img/placeholder.png'">
                                 </div>
-                            </a>
+                                <div class="txt-post tira-coiso">
+                                    <span>${post.nome}</span>
+                                    <span>${post.userr}</span>
+                                </div>
+                            </div>
+                            </div>
                             `;
                 }
             })
@@ -479,10 +479,10 @@
     }
 
     function pesquisar(evento) {
-            if (evento.key == "Enter") {
-                sessionStorage.PESQUISA_ATUAL = search.value
-                sessionStorage.PESQUISANDO = 'true'
-                window.location = "posts.html"
-            }
+        if (evento.key == "Enter") {
+            sessionStorage.PESQUISA_ATUAL = search.value
+            sessionStorage.PESQUISANDO = 'true'
+            window.location = "posts.html"
         }
+    }
 </script>
