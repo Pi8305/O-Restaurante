@@ -26,6 +26,7 @@
 
 .imagem-he {
     height: 5vw;
+    background-color: transparent;
 }
 
 .r-side {
@@ -44,7 +45,7 @@
     display: flex;
     align-self: center;
     position: absolute; 
-    transform: translateX(29vw);
+    transform: translateX(31vw);
 }
 
 .mid input {

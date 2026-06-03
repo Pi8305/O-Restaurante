@@ -9,11 +9,13 @@
 .imagem-ap {
     display: flex;
     align-items: center;
-    background-color: #f0e7c3;
+    background-color: transparent;
     height: auto;
+    transform: translateX(2vw);
 }
 
 .imagem-ap img {
+    background-color: transparent;
     width: 26vw;
 }
 

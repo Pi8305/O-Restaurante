@@ -18,10 +18,10 @@
         <div class="border-head">
             <div class="header">
                 <div class="l-side">
-                    <a href="index-logado.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
+                    <a href="index-logado.html"><img src="img/logo_site.png" alt="logo" class="imagem-he"></a>
                 </div>
                 <div class="mid">
-                    <input type="text" id="search" onkeydown="pesquisar(event)">
+                    <input type="text" id="search" onkeydown="pesquisar(event)" placeholder="pesquisar tag">
                 </div>
                 <div class="r-side">
                     <div id="nome_usuario">
@@ -46,7 +46,7 @@
     <footer>
         <div class="footer">
             <div>
-
+                
             </div>
         </div>
     </footer>
@@ -55,6 +55,20 @@
 </html>
 
 <script>
+    function avisar(id) {
+        sessionStorage.ID_POST = id
+    
+        window.location = "post.html";
+    }
+    
+    function pesquisar(evento) {
+        if (evento.key == "Enter") {
+            sessionStorage.PESQUISA_ATUAL = search.value
+            sessionStorage.PESQUISANDO = 'true'
+            window.location = "posts.html"
+        }
+    }
+
     if (!(sessionStorage.EMAIL_USUARIO)) {
         window.location = "login.html";
     } else {
@@ -110,7 +124,7 @@
                     for (let i = 0; i < posts.length; i++) {
                         let post = posts[i];
                         postes.innerHTML += `
-                        <a href="javascript:void(0)" onclick="avisar(${post.idPost})" class="tira-coiso">
+                        <div onclick="avisar(${post.idPost})" class="post-click tira-coiso">
                             <div class="post tira-coiso">
                                 <div class="img-post tira-coiso">
                                     <img src="img/posts/${post.imagem}" alt="" onerror="this.src='img/placeholder.png'">
@@ -120,7 +134,7 @@
                                     <span>${post.userr}</span>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                         `;
                     }
                 })
@@ -134,21 +148,6 @@
                 maximo = true
             }
         }
-
-        function avisar(id) {
-            sessionStorage.ID_POST = id
-
-            window.location = "post.html";
-        }
-
-        function pesquisar(evento) {
-            if (evento.key == "Enter") {
-                sessionStorage.PESQUISA_ATUAL = search.value
-                sessionStorage.PESQUISANDO = 'true'
-                window.location = "posts.html"
-            }
-        }
-
 
         function carregarMais() {
             if (maximo == false) {

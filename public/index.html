@@ -17,10 +17,10 @@
         <div class="border-head">
             <div class="header">
                 <div class="l-side">
-                    <a href="index.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
+                    <a href="index.html"><img src="img/logo_site.png" alt="logo" class="imagem-he"></a>
                 </div>
                 <div class="mid">
-                    <input type="text" id="search">
+                    <input type="text" id="search" onkeydown="pesquisar(event)" placeholder="pesquisar tag">
                 </div>
                 <div class="r-side">
                     <div class="login-button">
@@ -36,7 +36,7 @@
     <main>
         <div class="apresentacao">
             <div class="imagem-ap">
-                <img src="img/placeholder.png" alt="">
+                <img src="img/logo_site.png" alt="">
             </div>
             <div class="texto-ap">
                 <span class="txt-ap">O nome "O Restaurante" vem de uma piada na comunidade online de arte aonde, para
@@ -108,5 +108,11 @@
         console.log(sessionStorage.ID_POST)
 
         window.location = "post.html";
+    }
+
+    function pesquisar(evento) {
+        if (evento.key == "Enter") {
+            window.location = "login.html"
+        }
     }
 </script>

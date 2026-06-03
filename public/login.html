@@ -15,10 +15,10 @@
     <div class="border-head">
       <div class="header">
         <div class="l-side">
-          <a href="index.html"><img src="img/placeholder.png" alt="logo" class="imagem-he"></a>
+          <a href="index.html"><img src="img/logo_site.png" alt="logo" class="imagem-he"></a>
         </div>
         <div class="mid">
-          <input type="text" id="search">
+          <input type="text" id="search" onkeydown="pesquisar(event)" placeholder="pesquisar tag">
         </div>
         <div class="r-side">
           <div class="login-button apagar">
@@ -52,7 +52,7 @@
           <div class="confirmar-senha">
             <div>
               <label for="inp_senha" class="mover">Senha:</label>
-              <input type="text" id="inp_senha" class="tamanho mover" placeholder="********">
+              <input type="password" id="inp_senha" class="tamanho mover" placeholder="********">
             </div>
           </div>
           <div>
@@ -145,6 +145,12 @@
       })
 
       return false;
+    }
+  }
+
+  function pesquisar(evento) {
+    if (evento.key == "Enter") {
+      window.location.reload()
     }
   }
 </script>
