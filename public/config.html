@@ -109,7 +109,7 @@
                     <div class="div-post">
                         <input type="file" id="arquivoPost">
                         <input type="text" id="nomePost">
-                        <input type="text" id="descricaoPost">
+                        <input type="text" id="descricaoPost" value="Personagem que fiz para um rpg que vou jogar">
                         <input type="text" id="tagsUsuario"><button onclick="AddTag()">Adicionar tag</button>
                         <div id="tagsss" class="tagsss"></div>
                         <button onclick="enviarPost()">enviar</button>
@@ -255,6 +255,12 @@
     let taguesADD = []
 
     function enviar() {
+        let arquivoCheck = arquivo.value
+
+        if (arquivoCheck == '') {
+            return false
+        }
+
         let usuarioAtual = sessionStorage.ID_USUARIO
         const formData = new FormData();
         formData.append('foto', arquivo.files[0])
@@ -275,6 +281,7 @@
         let tague = tagsUsuario.value
 
         if (tague == '') {
+            tagsUsuario.focus()
             return false;
         }
 
@@ -299,12 +306,16 @@
             })
             .then(function () {
                 tagsss.innerHTML += `${tague} `
+                tagsUsuario.value = ''
+                tagsUsuario.focus()
             });
     }
 
     function enviarPost() {
+        let nome = nomePost.value
+        let arquivoCheck = arquivoPost.value
 
-        if (tagues == []) {
+        if (tagues == [] || nome == '' || arquivoCheck == '') {
             return false;
         }
 
@@ -312,7 +323,6 @@
         const formData = new FormData()
         formData.append('foto', arquivoPost.files[0])
         formData.append('id', usuarioAtual)
-        let nome = nomePost.value
         let desc = descricaoPost.value
 
         let taguesF = `${tagues}`
@@ -378,6 +388,10 @@
         let idade = inpIdade.value
         let pronomes = inpPronomes.value
 
+        if (desc == '' && idade == '' && pronomes == '') {
+            return false
+        }
+
         if (desc == '' && (sessionStorage.DESC_USUARIO == 'nada' || sessionStorage.DESC_USUARIO == '')) {
             desc = "nada"
         } else if (desc == '' && (sessionStorage.DESC_USUARIO != 'nada' || sessionStorage.DESC_USUARIO != '')) {
@@ -420,6 +434,10 @@
         let discord = div_discord.value
         let outros1 = div_outros1.value
         let outros2 = div_outros2.value
+
+        if (linktree == '' && instagram == '' && twitter == '' && bluesky == '' && youtube == '' && discord == '' && outros1 == '' && outros2 == '') {
+            return false
+        }
 
         if (linktree == '' && (sessionStorage.LINK_USUARIO == 'nada' || sessionStorage.LINK_USUARIO == '')) {
             linktree = 'nada'
